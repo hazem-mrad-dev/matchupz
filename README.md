@@ -11,7 +11,7 @@ The following **Use Case Diagram** represents the interactions between different
 ## Entity-Class Diagram
 Below is the **Entity-Class Diagram**, which showcases the relationships and attributes of various entities within the system:
 
-![Entity-Class Diagram](./diagrams/entity_class_diagram.png)
+![Entity-Class Diagram](./umldiagram.png)
 
 ## Features
 - User authentication and registration
