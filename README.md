@@ -6,7 +6,7 @@ Gestion MatchUpz is a comprehensive system designed to manage various roles and 
 ## Use Case Diagram
 The following **Use Case Diagram** represents the interactions between different actors and their respective functionalities within the system:
 
-![Use Case Diagram](./diagrams/use_case_diagram.png)
+![Use Case Diagram](./usecase.png)
 
 ## Entity-Class Diagram
 Below is the **Entity-Class Diagram**, which showcases the relationships and attributes of various entities within the system:
