@@ -40,12 +40,25 @@ public class MainProg {
         //===========================================================/
 
 <
-         */
+
         StatistiquesPostMatchService service = new StatistiquesPostMatchService();
         StatistiquesPostMatch stat = new StatistiquesPostMatch(0, 11, 1, 2, 1, 8.5f, 3, 7.5f);
         //service.ajouter(stat);
         service.modifier(stat);
         service.supprimer(new StatistiquesPostMatch(5, 11, 1, 10, 10, 8.5f, 3, 7.5f));
+
+
+         */
+        SportService sportService = new SportService();
+
+        // Add a new sport
+        Sport sport1 = new Sport("Football", "A team sport played with a ball.");
+        sportService.ajouter(sport1);
+
+        // Update a sport
+        Sport sport2 = new Sport(1, "Soccer", "A popular team sport worldwide.");
+        sportService.modifier(sport2);
+
 
 
     }

@@ -4,23 +4,20 @@ public class Sport {
     private int idSport;
     private String nom;
     private String description;
-    private String type;
 
     // Constructors
     public Sport() {
     }
 
-    public Sport(int idSport, String nom, String description, String type) {
+    public Sport(int idSport, String nom, String description) {
         this.idSport = idSport;
         this.nom = nom;
         this.description = description;
-        this.type = type;
     }
 
-    public Sport(String nom, String description, String type) {
+    public Sport(String nom, String description) {
         this.nom = nom;
         this.description = description;
-        this.type = type;
     }
 
     // Getters and Setters
@@ -48,14 +45,6 @@ public class Sport {
         this.description = description;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     // toString
     @Override
     public String toString() {
@@ -63,7 +52,6 @@ public class Sport {
                 "idSport=" + idSport +
                 ", nom='" + nom + '\'' +
                 ", description='" + description + '\'' +
-                ", type='" + type + '\'' +
                 '}';
     }
 }

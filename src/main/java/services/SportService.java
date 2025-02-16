@@ -13,12 +13,11 @@ public class SportService implements IService<Sport> {
 
     @Override
     public void ajouter(Sport sport) {
-        String req = "INSERT INTO `sport` (nom, description, type) VALUES (?, ?, ?)";
+        String req = "INSERT INTO `sport` (nom_sport, description) VALUES (?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setString(1, sport.getNom());
             ps.setString(2, sport.getDescription());
-            ps.setString(3, sport.getType());
             ps.executeUpdate();
             System.out.println("Sport ajouté: " + sport.getNom());
         } catch (SQLException e) {
@@ -28,13 +27,12 @@ public class SportService implements IService<Sport> {
 
     @Override
     public void modifier(Sport sport) {
-        String req = "UPDATE `sport` SET nom=?, description=?, type=? WHERE id_sport=?";
+        String req = "UPDATE `sport` SET nom_sport=?, description=? WHERE id_sport=?";
         try {
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setString(1, sport.getNom());
             ps.setString(2, sport.getDescription());
-            ps.setString(3, sport.getType());
-            ps.setInt(4, sport.getIdSport());
+            ps.setInt(3, sport.getIdSport());
             ps.executeUpdate();
             System.out.println("Sport modifié: " + sport.getNom());
         } catch (SQLException e) {
@@ -65,9 +63,8 @@ public class SportService implements IService<Sport> {
             while (rs.next()) {
                 Sport sport = new Sport();
                 sport.setIdSport(rs.getInt("id_sport"));
-                sport.setNom(rs.getString("nom"));
+                sport.setNom(rs.getString("nom_sport"));
                 sport.setDescription(rs.getString("description"));
-                sport.setType(rs.getString("type"));
                 sports.add(sport);
             }
         } catch (SQLException e) {
