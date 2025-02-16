@@ -8,42 +8,14 @@ public class Joueur {
     private String prenom;
     private Date dateNaissance;
     private String poste;
-    private float taille; // in cm
-    private float poids;  // in kg
+    private float taille;
+    private float poids;
     private String statut;
     private String email;
     private String telephone;
+    private int idSport; // Foreign key to the Sport table
 
-    public Joueur(int idJoueur, String nom, String prenom, Date dateNaissance, String poste,
-                  float taille, float poids, String statut, String email, String telephone) {
-        this.idJoueur = idJoueur;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.dateNaissance = dateNaissance;
-        this.poste = poste;
-        this.taille = taille;
-        this.poids = poids;
-        this.statut = statut;
-        this.email = email;
-        this.telephone = telephone;
-    }
-
-    public Joueur(String nom, String prenom, Date dateNaissance, String poste,
-                  float taille, float poids, String statut, String email, String telephone) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.dateNaissance = dateNaissance;
-        this.poste = poste;
-        this.taille = taille;
-        this.poids = poids;
-        this.statut = statut;
-        this.email = email;
-        this.telephone = telephone;
-    }
-
-    public Joueur() {
-
-    }
+    // Getters and Setters
 
     public int getIdJoueur() {
         return idJoueur;
@@ -125,20 +97,11 @@ public class Joueur {
         this.telephone = telephone;
     }
 
-    // toString method
-    @Override
-    public String toString() {
-        return "Joueur{" +
-                "idJoueur=" + idJoueur +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", dateNaissance=" + dateNaissance +
-                ", poste='" + poste + '\'' +
-                ", taille=" + taille +
-                ", poids=" + poids +
-                ", statut='" + statut + '\'' +
-                ", email='" + email + '\'' +
-                ", telephone='" + telephone + '\'' +
-                '}';
+    public int getIdSport() {
+        return idSport;
+    }
+
+    public void setIdSport(int idSport) {
+        this.idSport = idSport;
     }
 }
