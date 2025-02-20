@@ -357,7 +357,7 @@
                                                                 <Button fx:id="annulerButton" onAction="#handleAnnulerButton"
                                                                         id="btn-secondary" layoutY="7.0"
                                                                         mnemonicParsing="false" prefHeight="35.0"
-                                                                        prefWidth="164.0" text="Annuler"/>
+                                                                        prefWidth="164.0" text="Précedent"/>
                                                                 <Button fx:id="ajouterButton" onAction="#ajouter"
                                                                         layoutX="467.0" layoutY="7.0"
                                                                         mnemonicParsing="false" prefHeight="35.0"

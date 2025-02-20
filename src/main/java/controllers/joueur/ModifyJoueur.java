@@ -17,9 +17,6 @@ import java.sql.Date;
 public class ModifyJoueur {
 
     @FXML
-    private Button annulerButton;
-
-    @FXML
     private TextField nomField;
 
     @FXML
@@ -51,6 +48,57 @@ public class ModifyJoueur {
 
     @FXML
     private Button modifierButton;
+
+    @FXML
+    private Button annulerButton;
+
+    @FXML
+    private Button joueurButton;
+
+    @FXML
+    private Button Home;
+
+    @FXML
+    private void handleHome() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) Home.getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Failed to load the FXML file");
+            alert.setContentText("Details: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void HandleJoueur() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/DisplayJoueur.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) joueurButton.getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Failed to load the FXML file");
+            alert.setContentText("Details: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
 
     @FXML
     private void handleAnnulerButton() {
