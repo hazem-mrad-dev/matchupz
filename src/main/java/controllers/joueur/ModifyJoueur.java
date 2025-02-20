@@ -1,5 +1,9 @@
 package controllers.joueur;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import models.Joueur;
 import services.JoueurService;
 
@@ -7,9 +11,13 @@ import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.sql.Date;
 
 public class ModifyJoueur {
+
+    @FXML
+    private Button annulerButton;
 
     @FXML
     private TextField nomField;
@@ -44,17 +52,34 @@ public class ModifyJoueur {
     @FXML
     private Button modifierButton;
 
-    private Joueur joueur; // The Joueur object you want to modify
+    @FXML
+    private void handleAnnulerButton() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/DisplayJoueur.fxml"));
+            Parent root = loader.load();
 
+            Stage stage = (Stage) annulerButton.getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Failed to load the FXML file");
+            alert.setContentText("Details: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
+    private Joueur joueur;
     public void setJoueur(Joueur joueur) {
         this.joueur = joueur;
-        // You can populate the UI with the current player's details if needed
     }
-    private Joueur joueurToModify; // Holds the current Joueur to modify
+    private Joueur joueurToModify;
 
     public void setJoueurToModify(Joueur joueur) {
         this.joueurToModify = joueur;
-        // Pre-fill the fields with the player's current information
         nomField.setText(joueur.getNom());
         prenomField.setText(joueur.getPrenom());
         dateNaissanceField.setText(joueur.getDateNaissance().toString());
@@ -69,7 +94,6 @@ public class ModifyJoueur {
 
     @FXML
     void modifier(ActionEvent event) {
-        // Validate that all fields are filled
         if (nomField.getText().trim().isEmpty() || prenomField.getText().trim().isEmpty() ||
                 dateNaissanceField.getText().trim().isEmpty() || posteField.getText().trim().isEmpty() ||
                 tailleField.getText().trim().isEmpty() || poidsField.getText().trim().isEmpty() ||
@@ -85,7 +109,6 @@ public class ModifyJoueur {
         }
 
         try {
-            // Retrieve values from the fields
             String nom = nomField.getText().trim();
             String prenom = prenomField.getText().trim();
             String dateNaissanceStr = dateNaissanceField.getText().trim();
@@ -97,9 +120,6 @@ public class ModifyJoueur {
             String telephone = telephoneField.getText().trim();
             int idSport = Integer.parseInt(idSportField.getText().trim());
 
-            // Validate inputs (reuse validation logic from AjoutJoueur if necessary)
-
-            // Validate date format
             java.sql.Date dateNaissance;
             try {
                 dateNaissance = java.sql.Date.valueOf(dateNaissanceStr);
@@ -112,7 +132,6 @@ public class ModifyJoueur {
                 return;
             }
 
-            // Update the Joueur object
             joueurToModify.setNom(nom);
             joueurToModify.setPrenom(prenom);
             joueurToModify.setDateNaissance(dateNaissance);
@@ -124,7 +143,6 @@ public class ModifyJoueur {
             joueurToModify.setTelephone(telephone);
             joueurToModify.setIdSport(idSport);
 
-            // Save the changes using the JoueurService
             JoueurService joueurService = new JoueurService();
             joueurService.modifier(joueurToModify);
 

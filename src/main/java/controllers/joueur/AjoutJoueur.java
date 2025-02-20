@@ -1,5 +1,9 @@
 package controllers.joueur;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import models.Joueur;
 import services.JoueurService;
 
@@ -7,10 +11,14 @@ import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.sql.Date; // Ensure this is imported
 import java.time.LocalDate;
 
 public class AjoutJoueur {
+
+    @FXML
+    private Button annulerButton;
 
     @FXML
     private TextField nomField;
@@ -44,6 +52,31 @@ public class AjoutJoueur {
 
     @FXML
     private Button ajouterButton;
+
+    @FXML
+    private void handleAnnulerButton() {
+        try {
+            // Load the FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/DisplayJoueur.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage
+            Stage stage = (Stage) annulerButton.getScene().getWindow();
+
+            // Set the new scene
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the error (e.g., show an alert)
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Failed to load the FXML file");
+            alert.setContentText("Details: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
 
     @FXML
     void ajouter(ActionEvent event) {

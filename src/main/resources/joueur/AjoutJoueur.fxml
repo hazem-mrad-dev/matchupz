@@ -158,7 +158,7 @@
                                                                         <Font name="Montserrat Medium" size="12.0"/>
                                                                     </font>
                                                                 </Button>
-                                                                <Button alignment="CENTER" mnemonicParsing="false"
+                                                                <Button onAction="#handleAnnulerButton" alignment="CENTER" mnemonicParsing="false"
                                                                         prefHeight="30.0" prefWidth="160.0"
                                                                         styleClass="accordion-button" text="Teams">
                                                                     <font>
@@ -354,7 +354,8 @@
                                                         <AnchorPane prefHeight="50.0" prefWidth="630.0"
                                                                     GridPane.columnIndex="1" GridPane.rowIndex="10">
                                                             <children>
-                                                                <Button id="btn-secondary" layoutY="7.0"
+                                                                <Button fx:id="annulerButton" onAction="#handleAnnulerButton"
+                                                                        id="btn-secondary" layoutY="7.0"
                                                                         mnemonicParsing="false" prefHeight="35.0"
                                                                         prefWidth="164.0" text="Annuler"/>
                                                                 <Button fx:id="ajouterButton" onAction="#ajouter"

@@ -97,6 +97,54 @@ and open the template in the editor.
     -fx-font-family:"Arial";
 }
 
+/* Base Scrollbar */
+.scroll-bar {
+    -fx-background-color: transparent; /* Make the background of the scrollbar transparent */
+    -fx-pref-width: 8px; /* Set preferred width for the scrollbar */
+    -fx-pref-height: 8px; /* Set preferred height for the scrollbar */
+}
+
+/* Scroll Thumb */
+.scroll-bar .thumb {
+    -fx-background-color: #219a6a; /* Greenish thumb color */
+    -fx-background-radius: 5px; /* Rounded corners for the thumb */
+}
+
+/* Scroll Thumb Hover */
+.scroll-bar .thumb:hover {
+    -fx-background-color: #18a383; /* Slightly darker green on hover */
+}
+
+/* Scroll Track */
+.scroll-bar .track {
+    -fx-background-color: #333; /* Dark background for the track */
+    -fx-background-radius: 5px; /* Rounded corners for the track */
+}
+
+/* Horizontal Scrollbar */
+.scroll-bar:horizontal {
+    -fx-min-height: 8px; /* Minimum height for horizontal scrollbar */
+    -fx-max-height: 8px; /* Maximum height for horizontal scrollbar */
+}
+
+/* Vertical Scrollbar */
+.scroll-bar:vertical {
+    -fx-min-width: 8px; /* Minimum width for vertical scrollbar */
+    -fx-max-width: 8px; /* Maximum width for vertical scrollbar */
+}
+
+/* Remove scrollbar buttons */
+.table-view .scroll-bar .decrement-button,
+.table-view .scroll-bar .increment-button {
+    -fx-background-color: transparent; /* Make buttons transparent */
+    -fx-padding: 0; /* Remove padding around buttons */
+    -fx-border-width: 0; /* Remove border */
+}
+
+.table-view .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #18a383;
+}
+
 .textfield{
     -fx-background-color:linear-gradient(to bottom, #efefef, #eee);
     -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
@@ -392,7 +440,7 @@ and open the template in the editor.
 
 /* General TabPane Style */
 .tab-pane {
-    -fx-background-color: #f7f9fc; /* Light background for the TabPane */
+    -fx-background-color: #efefef; /* Light background for the TabPane */
     -fx-padding: 10; /* Padding around the TabPane */
 }
 
