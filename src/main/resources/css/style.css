@@ -1,0 +1,64 @@
+/* Modern Table */
+.modern-table {
+    -fx-background-color: white;
+    -fx-border-color: #B0BEC5;
+    -fx-border-radius: 15px;
+    -fx-padding: 10px;
+}
+
+.modern-table .column-header-background {
+    -fx-background-color: #10375C;
+    -fx-border-radius: 15px 15px 0 0;
+}
+
+.modern-table .column-header {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Form Styling */
+.form-container {
+    -fx-background-color: white;
+    -fx-padding: 20px;
+    -fx-border-radius: 15px;
+    -fx-border-color: #B0BEC5;
+    -fx-spacing: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.15), 10, 0, 0, 5);
+}
+
+.input-field {
+    -fx-padding: 8px;
+    -fx-border-color: #B0BEC5;
+    -fx-border-radius: 10px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10px;
+}
+
+/* Modern Button */
+.modern-button {
+    -fx-background-color: #5CA0D3;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 15px;
+    -fx-background-radius: 10px;
+    -fx-border-color: transparent;
+    -fx-font-size: 16px;
+}
+
+.modern-button:hover {
+    -fx-background-color: #3B82A0;
+}
+
+/* Navigation Buttons */
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 20px;
+    -fx-border-radius: 10px;
+}
+
+.nav-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
