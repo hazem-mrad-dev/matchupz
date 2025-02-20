@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: linear-gradient(to right, #E3F2FD, #FFFFFF);"
+<AnchorPane fx:id="mainContainer" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: linear-gradient(to right, #E3F2FD, #FFFFFF);"
             xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controllers.AjoutMateriel">
 

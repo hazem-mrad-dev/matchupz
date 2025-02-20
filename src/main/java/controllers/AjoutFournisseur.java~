@@ -192,52 +192,20 @@ public class AjoutFournisseur {
         btnAjout.setText("Modifier");
 
         btnAjout.setOnAction(event -> {
-            // Vérification des champs avant modification
-            if (textFieldNom.getText().trim().isEmpty() || textFieldEmail.getText().trim().isEmpty() ||
-                    textFieldAdresse.getText().trim().isEmpty() || comboBoxCategorie.getValue() == null) {
-
-                showAlert(Alert.AlertType.WARNING, "Champs obligatoires", "Veuillez remplir tous les champs !");
-                return;
-            }
-
-            // Vérifier que le nom contient uniquement des lettres et des espaces
-            if (!textFieldNom.getText().matches("^[a-zA-Z\\s]+$")) {
-                showAlert(Alert.AlertType.ERROR, "Erreur", "Le nom doit contenir uniquement des lettres !");
-                return;
-            }
-
-            // Vérifier que l'email est valide
-            if (!textFieldEmail.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
-                showAlert(Alert.AlertType.ERROR, "Erreur", "L'email est invalide ! Utilisez un format correct (ex: exemple@mail.com).");
-                return;
-            }
-
-            // Vérifier que l'adresse est suffisamment longue
-            if (textFieldAdresse.getText().length() < 5) {
-                showAlert(Alert.AlertType.ERROR, "Erreur", "L'adresse doit contenir au moins 5 caractères !");
-                return;
-            }
-
-            // Mettre à jour les informations du fournisseur
-            fournisseur.setNom(textFieldNom.getText().trim());
-            fournisseur.setEmail(textFieldEmail.getText().trim());
-            fournisseur.setAdresse(textFieldAdresse.getText().trim());
+            fournisseur.setNom(textFieldNom.getText());
+            fournisseur.setEmail(textFieldEmail.getText());
+            fournisseur.setAdresse(textFieldAdresse.getText());
             fournisseur.setCategorie_produit(comboBoxCategorie.getValue());
 
-            // Appliquer la modification
             fournisseurService.modifier(fournisseur);
             fournisseurTable.refresh();
 
-            // Afficher un message de confirmation
             showAlert(Alert.AlertType.INFORMATION, "Modification", "Fournisseur modifié avec succès !");
-
-            // Réinitialiser le bouton et le formulaire
             btnAjout.setText("Ajouter");
             clearFields();
             btnAjout.setOnAction(this::ajouterFournisseur);
         });
     }
-
 
     // Supprimer un fournisseur
     private void deleteFournisseur(Fournisseur fournisseur) {

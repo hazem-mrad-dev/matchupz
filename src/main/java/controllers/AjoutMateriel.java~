@@ -207,7 +207,6 @@ public class AjoutMateriel {
 
     // Modifier un matériel
     private void modifyMateriel(Materiel materiel) {
-        // Pré-remplir les champs avec les données du matériel sélectionné
         textFieldNom.setText(materiel.getNom());
         textFieldQuantite.setText(String.valueOf(materiel.getQuantite()));
         textFieldPrix.setText(String.valueOf(materiel.getPrix_unitaire()));
@@ -217,66 +216,25 @@ public class AjoutMateriel {
         btnAjout.setText("Modifier");
 
         btnAjout.setOnAction(event -> {
-            // Vérifier si les champs sont vides
-            if (textFieldNom.getText().trim().isEmpty() || textFieldQuantite.getText().trim().isEmpty() ||
-                    textFieldPrix.getText().trim().isEmpty() || comboBoxType.getValue() == null ||
-                    comboBoxEtat.getValue() == null) {
-
-                showAlert(Alert.AlertType.WARNING, "Champs obligatoires", "Veuillez remplir tous les champs !");
-                return;
-            }
-
-            // Vérifier que le nom contient uniquement des lettres et des espaces
-            if (!textFieldNom.getText().matches("^[a-zA-Z\\s]+$")) {
-                showAlert(Alert.AlertType.ERROR, "Erreur", "Le nom doit contenir uniquement des lettres !");
-                return;
-            }
-
-            // Vérifier que la quantité est un nombre entier positif
-            int quantite;
             try {
-                quantite = Integer.parseInt(textFieldQuantite.getText().trim());
-                if (quantite <= 0) {
-                    showAlert(Alert.AlertType.ERROR, "Erreur", "La quantité doit être un nombre entier positif !");
-                    return;
-                }
+                materiel.setNom(textFieldNom.getText());
+                materiel.setQuantite(Integer.parseInt(textFieldQuantite.getText()));
+                materiel.setPrix_unitaire(Float.parseFloat(textFieldPrix.getText()));
+                materiel.setType(comboBoxType.getValue());
+                materiel.setEtat(comboBoxEtat.getValue());
+
+                materielService.modifier(materiel);
+                materielTable.refresh();
+
+                showAlert(Alert.AlertType.INFORMATION, "Modification", "Matériel modifié avec succès !");
+                btnAjout.setText("Ajouter");
+                clearFields();
+                btnAjout.setOnAction(this::ajouterMateriel);
             } catch (NumberFormatException e) {
-                showAlert(Alert.AlertType.ERROR, "Erreur", "Quantité invalide ! Entrez un nombre entier.");
-                return;
+                showAlert(Alert.AlertType.ERROR, "Erreur", "Quantité et prix doivent être des nombres valides !");
             }
-
-            // Vérifier que le prix est un nombre décimal positif
-            float prix;
-            try {
-                prix = Float.parseFloat(textFieldPrix.getText().trim());
-                if (prix <= 0) {
-                    showAlert(Alert.AlertType.ERROR, "Erreur", "Le prix doit être un nombre positif !");
-                    return;
-                }
-            } catch (NumberFormatException e) {
-                showAlert(Alert.AlertType.ERROR, "Erreur", "Prix invalide ! Entrez un nombre décimal.");
-                return;
-            }
-
-            // Appliquer les modifications si tout est valide
-            materiel.setNom(textFieldNom.getText().trim());
-            materiel.setQuantite(quantite);
-            materiel.setPrix_unitaire(prix);
-            materiel.setType(comboBoxType.getValue());
-            materiel.setEtat(comboBoxEtat.getValue());
-
-            // Mettre à jour dans la base de données
-            materielService.modifier(materiel);
-            materielTable.refresh();
-
-            // Afficher un message de confirmation et réinitialiser les champs
-            showAlert(Alert.AlertType.INFORMATION, "Modification", "Matériel modifié avec succès !");
-            btnAjout.setText("Ajouter");
-            clearFields();
-            btnAjout.setOnAction(this::ajouterMateriel);
         });
     }
-
 
     // Supprimer un matériel
     private void deleteMateriel(Materiel materiel) {
