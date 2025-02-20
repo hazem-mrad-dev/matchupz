@@ -1,0 +1,459 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 09 21, 22, 4:12:17 PM
+    Author     : WINDOWS 10
+    Subscribe our Channel --> https://www.youtube.com/channel/UCPgcmw0LXToDn49akUEJBkQ
+ * Thanks for the support guys! <3
+*/
+
+.top-form{
+    -fx-background-color:#fff;
+    -fx-border-color:#000;
+    -fx-border-width:.4px .4px .2px .4px;
+}
+
+.semi-top-form{
+    -fx-background-color:#efefef;
+    -fx-border-color:#000;
+    -fx-border-width:.2px .4px .8px .4px;
+}
+
+.close{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+}
+.close:hover{
+    -fx-background-color:#ff3547;
+}
+
+.minimize{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+}
+.minimize:hover{
+    -fx-background-color:#ddd;
+}
+
+.nav-form{
+    -fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+}
+
+.nav-btn{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+    -fx-font-family:"Arial";
+    -fx-font-size:14px;
+    -fx-text-fill:#fff;
+    -fx-alignment:CENTER-LEFT;
+}
+
+.logout{
+    -fx-background-color:#219a6a;
+    -fx-background-radius:10px;
+    -fx-cursor:hand;
+}
+.logout:hover{
+    -fx-background-color:#18a383;
+}
+
+.shadow{
+    -fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.5), 6,0,0,0);
+}
+
+.grey-bg{
+    -fx-background-color:#efefef;
+    -fx-background-radius:8px;
+}
+
+
+.card{
+    -fx-background-color:linear-gradient(to right, #2b303c, #525968);
+    -fx-background-radius:5px;
+}
+
+.table-view{
+    -fx-background-color:transparent;
+    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-padding:0px;
+}
+.table-view .table-column{
+    -fx-alignment:CENTER;
+}
+.table-view .column-header-background{
+    -fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-background-insets: 0 0 0 0;
+    -f-background-radius:8px 8px 0px 0px;
+}
+.table-view .column-header, .filter{
+    -fx-background-color: transparent;
+    -fx-size:40px;
+}
+.table-view .column-header .label{
+    -fx-text-fill:#fff;
+    -fx-font-family:"Arial";
+}
+
+.textfield{
+    -fx-background-color:linear-gradient(to bottom, #efefef, #eee);
+    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-width:.8px;
+    -fx-font-family:"Tahoma";
+    -fx-border-radius:4px;
+}
+.textfield:focused{
+    -fx-border-width:1.8px;
+    -fx-background-color:#fff;
+}
+
+.search{
+    -fx-background-color:transparent;
+    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-radius:5px;
+    -fx-font-size:13px;
+    -fx-font-family:"Arial";
+    -fx-border-width:1px;
+    -fx-padding:0px 0px 0px 28px;
+}
+.search:focused{
+    -fx-border-width:2px;
+}
+
+.import-btn{
+    -fx-background-color:#ddd;
+    -fx-text-fill:red;
+    -fx-cursor:hand;
+}
+
+.add-btn{
+    -fx-background-color:#304575;
+    -fx-background-radius:8px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+    -fx-cursor:hand;
+}
+.add-btn:hover{
+    -fx-background-color:#3357a4;
+}
+
+.update-btn{
+    -fx-background-color:#327252;
+    -fx-background-radius:8px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+    -fx-cursor:hand;
+}
+.update-btn:hover{
+    -fx-background-color:#309a65;
+}
+
+.delete-btn{
+    -fx-background-color:#86253f;
+    -fx-background-radius:8px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+    -fx-cursor:hand;
+}
+.delete-btn:hover{
+    -fx-background-color:#ae1d46;
+}
+
+.clear-btn{
+    -fx-background-color:#753566;
+    -fx-background-radius:8px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+    -fx-cursor:hand;
+}
+.clear-btn:hover{
+    -fx-background-color:#9d3485;
+}
+
+.label-info{
+    -fx-background-color:transparent;
+    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-radius:4px;
+    -fx-padding:0px 0px 0px 8px;
+}
+
+.accordion {
+    -fx-background-color: transparent; /* Fully transparent background */
+    -fx-border-color: transparent; /* No visible border */
+    -fx-padding: 8px; /* Padding for spacing */
+}
+
+.accordion .title {
+    -fx-background-color: transparent; /* Default transparent background */
+    -fx-text-fill: #ffffff; /* Consistent white text */
+    -fx-font-weight: bold; /* Bold title text */
+    -fx-padding: 10px; /* Padding for spacing */
+    -fx-border-color: transparent; /* No border for a clean look */
+    -fx-cursor: hand; /* Hand cursor for interactivity */
+    -fx-transition: -fx-background-color 0.2s ease-in-out, -fx-text-fill 0.2s ease-in-out; /* Smooth transitions */
+}
+
+.accordion .title:hover {
+    -fx-background-color: rgba(24, 163, 131, 0.2); /* Slight translucent green for hover */
+    -fx-text-fill: #ffffff; /* Ensure text remains white on hover */
+    -fx-border-color: transparent; /* No border on hover */
+}
+
+.accordion .title:pressed {
+    -fx-background-color: rgba(24, 163, 131, 0.4); /* Slightly more visible translucent green for pressed state */
+    -fx-text-fill: #ffffff; /* Ensure text remains white on press */
+    -fx-border-color: transparent; /* No border on press */
+}
+
+.accordion .content {
+    -fx-background-color: transparent; /* Transparent background for content */
+    -fx-text-fill: #ffffff; /* White text for readability (if there is text inside the content) */
+    -fx-padding: 10px; /* Padding for content spacing */
+    -fx-border-color: transparent; /* No visible border */
+}
+
+
+/* Style specifically for buttons with class "accordion-button" */
+.accordion-button {
+    -fx-background-color: transparent; /* Transparent background for content */
+    -fx-text-fill: #fff; /* White text for readability */
+    -fx-padding: 10px; /* Padding for content spacing */
+    -fx-border-color: transparent; /* No visible border */
+}
+
+/* Hover effect for accordion buttons */
+.accordion-button:hover {
+    -fx-background-color: #18a383; /* Brighter green for hover effect */
+    -fx-border-color: #18a383; /* Hover border color */
+    -fx-border-color: transparent; /* No border on hover */
+}
+
+/* Pressed effect for accordion buttons */
+.accordion-button:pressed {
+    -fx-background-color: #18a383;
+    -fx-border-color: #309a65;
+    -fx-border-color: transparent; /* No border on press */
+}
+
+/* Style for the 'Annuler' button */
+#btn-secondary {
+    -fx-border-radius: 5px;
+    -fx-font-family: 'Montserrat SemiBold';
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-background-color: #E74C3C; /* Red color */
+    -fx-border-color: #C0392B; /* Darker red for border */
+    -fx-background-radius: 0; /* Rectangular shape */
+    -fx-padding: 5px 20px;
+}
+
+.btn-primary {
+    -fx-font-family: 'Montserrat SemiBold';
+    -fx-font-size: 15px;
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-background-radius: 5px; /* Match border radius for rounded corners */
+    -fx-text-fill: white;
+    -fx-background-color: #27AE60; /* Green color */
+    -fx-border-color: #1E8449; /* Darker green for border */
+    -fx-padding: 5px 20px;
+}
+
+
+/* Style for the 'Annuler' button */
+#btn-secondary {
+    -fx-font-family: 'Montserrat SemiBold';
+    -fx-font-size: 15px;
+    -fx-border-radius: 5px; /* Border radius */
+    -fx-background-radius: 5px; /* Match border radius for rounded corners */
+    -fx-text-fill: white;
+    -fx-background-color: #E74C3C; /* Red color */
+    -fx-border-color: #C0392B; /* Darker red for border */
+    -fx-padding: 5px 20px;
+}
+
+/* Hover effects for 'Annuler' */
+#btn-secondary:hover {
+    -fx-background-color: #C0392B; /* Slightly darker red */
+    -fx-border-color: #A93226;
+}
+
+/* Hover effects for 'Modifier' */
+#btn-primary:hover {
+    -fx-background-color: #1E8449; /* Slightly darker green */
+    -fx-border-color: #196F3D;
+}
+
+/* Focused effects */
+#btn-secondary:focused, #btn-primary:focused {
+    -fx-border-color: #F1C40F; /* Yellow border on focus */
+    -fx-border-width: 2px;
+}
+
+/* General Styling */
+.white-bg {
+    -fx-background-color: #ffffff;
+}
+
+.shadow {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 4);
+    -fx-padding: 10;
+}
+
+/* Form Title */
+.form-title {
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 36px;
+    -fx-fill: #333333;
+}
+
+/* Labels */
+.label-text {
+    -fx-font-family: "Montserrat Medium";
+    -fx-font-size: 15px;
+    -fx-fill: #555555;
+}
+
+/* Text Fields */
+.text-input {
+    -fx-font-family: "Montserrat Regular";
+    -fx-font-size: 14px;
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 5 10;
+}
+
+/* Style for ComboBox */
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+    -fx-font-family: 'Montserrat Medium';
+    -fx-font-size: 14px;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #1E8449; /* Match the app's primary color */
+    -fx-border-radius: 0 5px 5px 0;
+}
+
+.combo-box:hover {
+    -fx-border-color: #1E8449;
+}
+
+/* Style for Spinner */
+.spinner {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+    -fx-font-family: 'Montserrat Medium';
+    -fx-font-size: 14px;
+}
+
+/* Style for the Spinner Arrows */
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: #1E8449; /* Match primary color */
+    -fx-text-fill: white;
+    -fx-border-radius: 3px;
+    -fx-padding: 3px;
+    -fx-cursor: hand;
+}
+
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-background-color: #196F3D; /* Darker blue on hover */
+}
+
+/* Style for Spinner Value Field */
+.spinner .text-field {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-text-fill: #333; /* Dark text */
+    -fx-font-family: 'Montserrat Medium';
+    -fx-font-size: 14px;
+    -fx-alignment: center; /* Center the value text */
+}
+
+/* Focused state for the spinner */
+.spinner:focused {
+    -fx-border-color: #196F3D;
+}
+
+/* General TabPane Style */
+.tab-pane {
+    -fx-background-color: #f7f9fc; /* Light background for the TabPane */
+    -fx-padding: 10; /* Padding around the TabPane */
+}
+
+/* Tab Style */
+.tab {
+    -fx-background-color: #ffffff; /* White background for tabs */
+    -fx-text-fill: #333333; /* Dark text for tabs */
+    -fx-font-size: 15px; /* Font size for better readability */
+    -fx-padding: 10 20; /* Padding inside tabs */
+    -fx-border-color: #e0e0e0; /* Light border */
+    -fx-border-width: 1px; /* Thin border */
+    -fx-border-radius: 0; /* Rectangular shape */
+}
+
+/* Hover effect for tabs */
+.tab:hover {
+    -fx-background-color: #EFEFEF; /* Light cyan background on hover */
+    -fx-cursor: hand; /* Hand cursor for interactivity */
+}
+
+/* Selected Tab Style */
+.tab:selected {
+    -fx-border-color:linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-text-fill: #333333; /* Dark text for selected tab */
+    -fx-font-weight: bold; /* Bold text for the selected tab */
+}
+
+/* Tab Content Background */
+.tab .content {
+    -fx-background-color: #ffffff; /* White background for tab content */
+    -fx-border-radius: 0; /* Rectangular shape for content area */
+    -fx-padding: 10; /* Padding inside the tab content */
+    -fx-border-color: #e0e0e0; /* Light border for content */
+    -fx-border-width: 1px; /* Thin border */
+}
+
+/* Tab Indicator */
+.tab .tab-header-area .tab .tab-selected {
+    -fx-background-color: transparent; /* No background for the selected tab indicator */
+}
+
+/* Style for the 'Modify' button */
+#btn-modify {
+    -fx-border-radius: 5px;
+    -fx-font-family: 'Montserrat Light';
+    -fx-font-size: 7px;
+    -fx-text-fill: white;
+    -fx-background-color: #F1C40F; /* Yellow color */
+    -fx-border-color: #F39C12; /* Darker yellow for border */
+    -fx-background-radius: 0; /* Rectangular shape */
+    -fx-padding: 5px 20px;
+}
+
+/* Style for the 'Delete' button */
+#btn-delete {
+    -fx-border-radius: 5px;
+    -fx-font-family: 'Montserrat Light';
+    -fx-font-size: 7px;
+    -fx-text-fill: white;
+    -fx-background-color: #E74C3C; /* Red color */
+    -fx-border-color: #C0392B; /* Darker red for border */
+    -fx-background-radius: 0; /* Rectangular shape */
+    -fx-padding: 5px 20px;
+}

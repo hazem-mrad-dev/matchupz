@@ -40,7 +40,7 @@ public class JoueurService implements IService<Joueur> {
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setString(1, joueur.getNom());
             ps.setString(2, joueur.getPrenom());
-            ps.setDate(3, new java.sql.Date(joueur.getDateNaissance().getTime()));
+            ps.setDate(3, new java.sql.Date(joueur.getDateNaissance().getTime()));  // Correct usage
             ps.setString(4, joueur.getPoste());
             ps.setFloat(5, joueur.getTaille());
             ps.setFloat(6, joueur.getPoids());
@@ -48,13 +48,14 @@ public class JoueurService implements IService<Joueur> {
             ps.setString(8, joueur.getEmail());
             ps.setString(9, joueur.getTelephone());
             ps.setInt(10, joueur.getIdSport()); // Include the sport ID
-            ps.setInt(11, joueur.getIdJoueur());
+            ps.setInt(11, joueur.getIdJoueur()); // Set the ID of the player for the WHERE clause
             ps.executeUpdate();
             System.out.println("Joueur modifié");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void supprimer(Joueur joueur) {
@@ -78,18 +79,19 @@ public class JoueurService implements IService<Joueur> {
             PreparedStatement ps = connection.prepareStatement(req);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Joueur joueur = new Joueur();
-                joueur.setIdJoueur(rs.getInt("id_joueur"));
-                joueur.setNom(rs.getString("nom"));
-                joueur.setPrenom(rs.getString("prenom"));
-                joueur.setDateNaissance(rs.getDate("date_naissance"));
-                joueur.setPoste(rs.getString("poste"));
-                joueur.setTaille(rs.getFloat("taille"));
-                joueur.setPoids(rs.getFloat("poids"));
-                joueur.setStatut(rs.getString("statut"));
-                joueur.setEmail(rs.getString("email"));
-                joueur.setTelephone(rs.getString("telephone"));
-                joueur.setIdSport(rs.getInt("id_sport")); // Include the sport ID
+                Joueur joueur = new Joueur(
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getDate("date_naissance"),
+                        rs.getString("poste"),
+                        rs.getFloat("taille"),
+                        rs.getFloat("poids"),
+                        rs.getString("statut"),
+                        rs.getString("email"),
+                        rs.getString("telephone"),
+                        rs.getInt("id_sport")
+                );
+                joueur.setIdJoueur(rs.getInt("id_joueur")); // Set ID separately if needed
                 joueurs.add(joueur);
             }
         } catch (SQLException e) {
