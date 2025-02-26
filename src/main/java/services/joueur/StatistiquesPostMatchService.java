@@ -1,6 +1,7 @@
-package services;
+package services.joueur;
 
-import models.StatistiquesPostMatch;
+import models.joueur.StatistiquesPostMatch;
+import services.IService;
 import utils.MyDataSource;
 
 

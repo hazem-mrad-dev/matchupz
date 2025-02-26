@@ -8,226 +8,133 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import models.*;
-import models.Joueur;
-import services.*;
+import models.joueur.Joueur;
 import services.joueur.JoueurService;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DisplayJoueur {
-    @FXML
-    private Button joueurButton;
 
-    @FXML
-    private Button Home;
+    @FXML private Button joueurButton;
+    @FXML private Button homeButton;
+    @FXML private Button addJoueurButton;
+    @FXML private TableView<Joueur> tableView;
+    @FXML private TableColumn<Joueur, Integer> idColumn;
+    @FXML private TableColumn<Joueur, Integer> idSportColumn;
+    @FXML private TableColumn<Joueur, String> nomSportColumn;
+    @FXML private TableColumn<Joueur, String> nomColumn;
+    @FXML private TableColumn<Joueur, String> prenomColumn;
+    @FXML private TableColumn<Joueur, String> dateNaissanceColumn; // Changed to String
+    @FXML private TableColumn<Joueur, String> posteColumn;
+    @FXML private TableColumn<Joueur, Float> tailleColumn;
+    @FXML private TableColumn<Joueur, Float> poidsColumn;
+    @FXML private TableColumn<Joueur, String> statutColumn;
+    @FXML private TableColumn<Joueur, String> emailColumn;
+    @FXML private TableColumn<Joueur, String> telephoneColumn;
+    @FXML private TableColumn<Joueur, String> profilePictureColumn;
+    @FXML private TableColumn<Joueur, Void> modifierColumn;
+    @FXML private TableColumn<Joueur, Void> deleteColumn;
 
-    @FXML
-    private Button addJoueurButton;
-
-    @FXML
-    private Button addSportButton;
-
-    @FXML
-    private TableView<Joueur> tableView;
-
-    @FXML
-    private TableView<Sport> tableView1;
-
-    @FXML
-    private TableColumn<Joueur, Integer> idColumn;
-
-    @FXML
-    private TableColumn<Joueur, Integer> nomSportColumn;
-
-    @FXML
-    private TableColumn<Joueur, String> nomColumn;
-
-    @FXML
-    private TableColumn<Joueur, String> prenomColumn;
-
-    @FXML
-    private TableColumn<Joueur, String> dateNaissanceColumn;
-
-    @FXML
-    private TableColumn<Joueur, String> posteColumn;
-
-    @FXML
-    private TableColumn<Joueur, Float> tailleColumn;
-
-    @FXML
-    private TableColumn<Joueur, Float> poidsColumn;
-
-    @FXML
-    private TableColumn<Joueur, String> statutColumn;
-
-    @FXML
-    private TableColumn<Joueur, String> emailColumn;
-
-    @FXML
-    private TableColumn<Joueur, String> telephoneColumn;
-
-    @FXML
-    private TableColumn<Joueur, Void> modifierColumn;
-
-    @FXML
-    private TableColumn<Joueur, Void> deleteColumn;
+    private ObservableList<Joueur> joueurList = FXCollections.observableArrayList();
+    private JoueurService joueurService = new JoueurService();
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     @FXML
     private void handleHome() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/MainController.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) Home.getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Failed to load the FXML file");
-            alert.setContentText("Details: " + e.getMessage());
-            alert.showAndWait();
-        }
+        loadScene("/Home.fxml", homeButton);
     }
 
     @FXML
     private void HandleJoueur() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/MainController.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) joueurButton.getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Failed to load the FXML file");
-            alert.setContentText("Details: " + e.getMessage());
-            alert.showAndWait();
-        }
+        loadScene("/joueur/MainController.fxml", joueurButton);
     }
 
     @FXML
     private void handleAddJoueurButton() {
+        loadScene("/joueur/AjoutJoueur.fxml", addJoueurButton);
+    }
+
+    private void loadScene(String fxmlPath, Button button) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/AjoutJoueur.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
-
-            Stage stage = (Stage) addJoueurButton.getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            Stage stage = (Stage) button.getScene().getWindow();
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
-            // Handle the error (e.g., show an alert)
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Failed to load the FXML file");
-            alert.setContentText("Details: " + e.getMessage());
-            alert.showAndWait();
+            showAlert("Erreur", "Échec du chargement", e.getMessage());
         }
     }
 
-    private ObservableList<Joueur> joueurList = FXCollections.observableArrayList();
-    private JoueurService joueurService = new JoueurService();
-
     private void openModifyWindow(Joueur joueur, Stage stage) {
         try {
-            // Load ModifierJoueur.fxml for editing
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/ModifierJoueur.fxml"));
             Parent root = loader.load();
-
             ModifyJoueur controller = loader.getController();
             controller.setJoueurToModify(joueur);
-
-            // Set the scene for the modification window
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.show();
-
-            // Assume after some action (like entering data or focus lost), you want to switch to DisplayJoueur
-            stage.setOnHidden(event -> {
-                try {
-                    // After modification, load DisplayJoueur.fxml
-                    FXMLLoader displayLoader = new FXMLLoader(getClass().getResource("/joueur/DisplayJoueur.fxml"));
-                    Parent displayRoot = displayLoader.load();
-
-                    // Change the scene to DisplayJoueur
-                    Scene displayScene = new Scene(displayRoot);
-                    stage.setScene(displayScene); // Change the scene
-                    stage.show(); // Show the new scene (DisplayJoueur.fxml)
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Failed to load DisplayJoueur.fxml");
-                    alert.setContentText("Details: " + e.getMessage());
-                    alert.showAndWait();
-                }
-            });
-
+            stage.setOnHidden(event -> loadJoueurs());
         } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Failed to load the FXML file");
-            alert.setContentText("Details: " + e.getMessage());
-            alert.showAndWait();
+            showAlert("Erreur", "Échec du chargement", e.getMessage());
         }
     }
 
     @FXML
     public void initialize() {
-        // Initialize columns with appropriate data
-        idColumn.setCellValueFactory(cellData -> cellData.getValue().idJoueurProperty().asObject());
-        nomSportColumn.setCellValueFactory(cellData -> cellData.getValue().idSportProperty().asObject());
-        nomColumn.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
-        prenomColumn.setCellValueFactory(cellData -> cellData.getValue().prenomProperty());
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("idJoueur"));
+        idSportColumn.setCellValueFactory(new PropertyValueFactory<>("idSport"));
+        nomSportColumn.setCellValueFactory(new PropertyValueFactory<>("nomSport"));
+        nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        prenomColumn.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         dateNaissanceColumn.setCellValueFactory(cellData ->
-                new SimpleStringProperty(new SimpleDateFormat("dd/MM/yyyy").format(cellData.getValue().getDateNaissance()))
-        );
-        posteColumn.setCellValueFactory(cellData -> cellData.getValue().posteProperty());
-        tailleColumn.setCellValueFactory(cellData -> cellData.getValue().tailleProperty().asObject());
-        poidsColumn.setCellValueFactory(cellData -> cellData.getValue().poidsProperty().asObject());
-        statutColumn.setCellValueFactory(cellData -> cellData.getValue().statutProperty());
-        emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
-        telephoneColumn.setCellValueFactory(cellData -> cellData.getValue().telephoneProperty());
+                new SimpleStringProperty(dateFormat.format(cellData.getValue().getDateNaissance())));
+        posteColumn.setCellValueFactory(new PropertyValueFactory<>("poste"));
+        tailleColumn.setCellValueFactory(new PropertyValueFactory<>("taille"));
+        poidsColumn.setCellValueFactory(new PropertyValueFactory<>("poids"));
+        statutColumn.setCellValueFactory(new PropertyValueFactory<>("statut"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        telephoneColumn.setCellValueFactory(new PropertyValueFactory<>("telephone"));
+        profilePictureColumn.setCellFactory(param -> new TableCell<>() {
+            private final ImageView imageView = new ImageView();
+            {
+                imageView.setFitHeight(30);
+                imageView.setFitWidth(30);
+            }
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                } else {
+                    try {
+                        imageView.setImage(new javafx.scene.image.Image(item));
+                        setGraphic(imageView);
+                    } catch (Exception e) {
+                        setGraphic(null);
+                    }
+                }
+            }
+        });
+        profilePictureColumn.setCellValueFactory(new PropertyValueFactory<>("profilePictureUrl"));
 
-        // Modifier column with confirmation dialog
-        modifierColumn.setCellFactory(param -> new TableCell<Joueur, Void>() {
+        modifierColumn.setCellFactory(param -> new TableCell<>() {
             private final Button btn = new Button("Modifier");
-
             {
-                btn.setId("btn-modify"); // Assign the CSS ID for styling
+                btn.setId("btn-modify");
                 btn.setOnAction(event -> {
                     Joueur selectedJoueur = getTableView().getItems().get(getIndex());
-
-                    // Confirmation dialog before modification
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Confirmation");
-                    alert.setHeaderText("Are you sure you want to modify this player?");
-                    alert.setContentText("Player: " + selectedJoueur.getNom() + " " + selectedJoueur.getPrenom());
-
-                    alert.showAndWait().ifPresent(response -> {
-                        if (response == ButtonType.OK) {
-                            Stage stage = (Stage) btn.getScene().getWindow(); // Get the stage from the button clicked
-                            openModifyWindow(selectedJoueur, stage); // Pass stage directly
-                        }
+                    showConfirmation("Confirmation", "Modifier ce joueur ?", "Joueur: " + selectedJoueur.getNom() + " " + selectedJoueur.getPrenom(), () -> {
+                        Stage stage = (Stage) btn.getScene().getWindow();
+                        openModifyWindow(selectedJoueur, stage);
                     });
                 });
             }
-
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
@@ -235,43 +142,51 @@ public class DisplayJoueur {
             }
         });
 
-        // Delete column with confirmation dialog
-        deleteColumn.setCellFactory(param -> new TableCell<Joueur, Void>() {
-            private final Button btn = new Button("Delete");
-
+        deleteColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button btn = new Button("Supprimer");
             {
-                btn.setId("btn-delete"); // Assign the CSS ID for styling
+                btn.setId("btn-delete");
                 btn.setOnAction(event -> {
                     Joueur selectedJoueur = getTableView().getItems().get(getIndex());
-
-                    // Confirmation dialog before deletion
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Confirmation");
-                    alert.setHeaderText("Are you sure you want to delete this player?");
-                    alert.setContentText("Player: " + selectedJoueur.getNom() + " " + selectedJoueur.getPrenom());
-
-                    alert.showAndWait().ifPresent(response -> {
-                        if (response == ButtonType.OK) {
-                            joueurService.supprimer(selectedJoueur);  // Delete the player using the service
-                            loadJoueurs();  // Reload the table after deletion
-                        }
+                    showConfirmation("Confirmation", "Supprimer ce joueur ?", "Joueur: " + selectedJoueur.getNom() + " " + selectedJoueur.getPrenom(), () -> {
+                        joueurService.supprimer(selectedJoueur);
+                        loadJoueurs();
                     });
                 });
             }
-
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
                 setGraphic(empty ? null : btn);
             }
         });
-        loadJoueurs();  // Load joueurs into the table view
+
+        loadJoueurs();
     }
 
     public void loadJoueurs() {
         joueurList.clear();
-        joueurList.addAll(joueurService.recherche());  // Fetch list of joueurs from the service
+        joueurList.addAll(joueurService.recherche());
         tableView.setItems(joueurList);
     }
 
+    private void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    private void showConfirmation(String title, String header, String content, Runnable onConfirm) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                onConfirm.run();
+            }
+        });
+    }
 }

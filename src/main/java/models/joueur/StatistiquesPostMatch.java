@@ -1,4 +1,4 @@
-package models;
+package models.joueur;
 
 public class StatistiquesPostMatch {
     private int idStatPostMatch;

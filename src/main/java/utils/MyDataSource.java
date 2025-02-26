@@ -8,7 +8,7 @@ public class MyDataSource {
     private static MyDataSource instance ;
     private Connection conn;
 
-    private final String URL="jdbc:mysql://localhost:3306/user";
+    private final String URL="jdbc:mysql://localhost:3306/matchupz";
     private final String USER="root";
     private final String PASSWORD="";
 

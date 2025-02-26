@@ -7,176 +7,102 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import models.HistoriqueClub;
-import services.joueur.HistoriqueClubService;
+import models.joueur.EvaluationPhysique;
+import services.joueur.EvaluationPhysiqueService;
 
 import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class DisplayEvaluation {
-    @FXML
-    private Button joueurButton;
-    @FXML
-    private Button Home;
-    @FXML
-    private Button addHistoriqueButton; // Changed to reflect adding historical data
-    @FXML
-    private TableView<HistoriqueClub> tableView;
-    @FXML
-    private TableColumn<HistoriqueClub, Integer> idHistoriqueColumn;
-    @FXML
-    private TableColumn<HistoriqueClub, Integer> idJoueurColumn;
-    @FXML
-    private TableColumn<HistoriqueClub, String> nomClubColumn;
-    @FXML
-    private TableColumn<HistoriqueClub, String> saisonDebutColumn;
-    @FXML
-    private TableColumn<HistoriqueClub, String> saisonFinColumn;
-    @FXML
-    private TableColumn<HistoriqueClub, Void> modifierColumn;
-    @FXML
-    private TableColumn<HistoriqueClub, Void> deleteColumn;
 
-    private ObservableList<HistoriqueClub> historiqueList = FXCollections.observableArrayList();
-    private HistoriqueClubService historiqueClubService = new HistoriqueClubService();
+    @FXML private Button joueurButton;
+    @FXML private Button homeButton;
+    @FXML private Button addEvaluationButton;
+    @FXML private TextField searchField;
+    @FXML private TableView<EvaluationPhysique> tableView;
+    @FXML private TableColumn<EvaluationPhysique, Integer> idEvaluationColumn;
+    @FXML private TableColumn<EvaluationPhysique, Integer> idJoueurColumn;
+    @FXML private TableColumn<EvaluationPhysique, Date> dateEvaluationColumn;
+    @FXML private TableColumn<EvaluationPhysique, Float> niveauEnduranceColumn;
+    @FXML private TableColumn<EvaluationPhysique, Float> forcePhysiqueColumn;
+    @FXML private TableColumn<EvaluationPhysique, Float> vitesseColumn;
+    @FXML private TableColumn<EvaluationPhysique, String> etatBlessureColumn;
+    @FXML private TableColumn<EvaluationPhysique, Void> modifierColumn;
+    @FXML private TableColumn<EvaluationPhysique, Void> deleteColumn;
+
+    private ObservableList<EvaluationPhysique> evaluationList = FXCollections.observableArrayList();
+    private ObservableList<EvaluationPhysique> filteredList = FXCollections.observableArrayList();
+    private EvaluationPhysiqueService evaluationService = new EvaluationPhysiqueService();
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @FXML
     private void handleHome() {
+        loadScene("/Home.fxml", homeButton);
+    }
+
+    @FXML
+    private void handleJoueur() {
+        loadScene("/joueur/MainController.fxml", joueurButton);
+    }
+
+    @FXML
+    private void handleEvaluationButton() {
+        loadScene("/joueur/AjoutEvaluation.fxml", addEvaluationButton);
+    }
+
+    private void loadScene(String fxmlPath, Button button) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/MainController.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
-
-            Stage stage = (Stage) Home.getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            Stage stage = (Stage) button.getScene().getWindow();
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Failed to load the FXML file");
-            alert.setContentText("Details: " + e.getMessage());
-            alert.showAndWait();
+            showAlert("Error", "Failed to load the FXML file", e.getMessage());
+        }
+    }
+
+    private void openModifyWindow(EvaluationPhysique evaluation, Stage stage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/ModifierEvaluation.fxml"));
+            Parent root = loader.load();
+            ModifyEvaluation controller = loader.getController();
+            controller.setEvaluationToModify(evaluation);
+            stage.setScene(new Scene(root));
+            stage.show();
+            stage.setOnHidden(event -> loadEvaluations()); // Refresh after modification
+        } catch (IOException e) {
+            showAlert("Error", "Failed to load the ModifierEvaluation.fxml", e.getMessage());
         }
     }
 
     @FXML
-    private void HandleJoueur() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/MainController.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) joueurButton.getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Failed to load the FXML file");
-            alert.setContentText("Details: " + e.getMessage());
-            alert.showAndWait();
-        }
-    }
-
-    @FXML
-    private void handleAddHistoriqueButton() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/AjoutHistorique.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) addHistoriqueButton.getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Failed to load the FXML file");
-            alert.setContentText("Details: " + e.getMessage());
-            alert.showAndWait();
-        }
-    }
-
-    private void openModifyWindow(HistoriqueClub historique, Stage stage) {
-        try {
-            // Load ModifierHistorique.fxml for editing
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/ModifierHistorique.fxml"));
-            Parent root = loader.load();
-
-            ModifyHistorique controller = loader.getController();
-            controller.setHistoriqueToModify(historique);
-
-            // Set the scene for the modification window
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-            // After modification, load DisplayHistorique.fxml
-            stage.setOnHidden(event -> {
-                try {
-                    FXMLLoader displayLoader = new FXMLLoader(getClass().getResource("/joueur/DisplayHistorique.fxml"));
-                    Parent displayRoot = displayLoader.load();
-
-                    Scene displayScene = new Scene(displayRoot);
-                    stage.setScene(displayScene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Failed to load DisplayHistorique.fxml");
-                    alert.setContentText("Details: " + e.getMessage());
-                    alert.showAndWait();
-                }
-            });
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Failed to load the FXML file");
-            alert.setContentText("Details: " + e.getMessage());
-            alert.showAndWait();
-        }
-    }
-
-    public void initialize() {
-        // Initialize columns with appropriate data
-        idHistoriqueColumn.setCellValueFactory(cellData -> cellData.getValue().idHistoriqueProperty().asObject());
+    private void initialize() {
+        // Set up table columns
+        idEvaluationColumn.setCellValueFactory(cellData -> cellData.getValue().idEvaluationProperty().asObject());
         idJoueurColumn.setCellValueFactory(cellData -> cellData.getValue().idJoueurProperty().asObject());
-        nomClubColumn.setCellValueFactory(cellData -> cellData.getValue().nomClubProperty());
-        saisonDebutColumn.setCellValueFactory(cellData -> cellData.getValue().saisonDebutProperty().asString());
-        saisonFinColumn.setCellValueFactory(cellData -> cellData.getValue().saisonFinProperty().asString());
-        loadHistorique();
-        modifierColumn.setCellFactory(param -> new TableCell<HistoriqueClub, Void>() {
-            private final Button btn = new Button("Modifier");
+        dateEvaluationColumn.setCellValueFactory(cellData -> cellData.getValue().dateEvaluationProperty());
+        niveauEnduranceColumn.setCellValueFactory(cellData -> cellData.getValue().niveauEnduranceProperty().asObject());
+        forcePhysiqueColumn.setCellValueFactory(cellData -> cellData.getValue().forcePhysiqueProperty().asObject());
+        vitesseColumn.setCellValueFactory(cellData -> cellData.getValue().vitesseProperty().asObject());
+        etatBlessureColumn.setCellValueFactory(cellData -> cellData.getValue().etatBlessureProperty());
 
+        // Modifier column
+        modifierColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button btn = new Button("Modifier");
             {
                 btn.setId("btn-modify");
                 btn.setOnAction(event -> {
-                    HistoriqueClub selectedHistorique = getTableView().getItems().get(getIndex());
-
-                    // Confirmation dialog before modification
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Confirmation");
-                    alert.setHeaderText("Are you sure you want to modify this historique?");
-                    alert.setContentText("Historique Club: " + selectedHistorique.getNomClub());
-
-                    alert.showAndWait().ifPresent(response -> {
-                        if (response == ButtonType.OK) {
-                            Stage stage = (Stage) btn.getScene().getWindow();
-                            openModifyWindow(selectedHistorique, stage);
-                        }
+                    EvaluationPhysique selectedEvaluation = getTableView().getItems().get(getIndex());
+                    showConfirmation("Confirmation", "Modify this evaluation?", "Evaluation ID: " + selectedEvaluation.getIdEvaluation(), () -> {
+                        Stage stage = (Stage) btn.getScene().getWindow();
+                        openModifyWindow(selectedEvaluation, stage);
                     });
                 });
             }
-
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
@@ -184,30 +110,19 @@ public class DisplayEvaluation {
             }
         });
 
-        // Delete column with confirmation dialog
-        deleteColumn.setCellFactory(param -> new TableCell<HistoriqueClub, Void>() {
-            private final Button btn = new Button("Delete");
-
+        // Delete column
+        deleteColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button btn = new Button("Supprimer");
             {
                 btn.setId("btn-delete");
                 btn.setOnAction(event -> {
-                    HistoriqueClub selectedHistorique = getTableView().getItems().get(getIndex());
-
-                    // Confirmation dialog before deletion
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Confirmation");
-                    alert.setHeaderText("Are you sure you want to delete this historique?");
-                    alert.setContentText("Historique Club: " + selectedHistorique.getNomClub());
-
-                    alert.showAndWait().ifPresent(response -> {
-                        if (response == ButtonType.OK) {
-                            historiqueClubService.supprimer(selectedHistorique);  // Delete the historique using the service
-                            loadHistorique();  // Reload the table after deletion
-                        }
+                    EvaluationPhysique selectedEvaluation = getTableView().getItems().get(getIndex());
+                    showConfirmation("Confirmation", "Delete this evaluation?", "Evaluation ID: " + selectedEvaluation.getIdEvaluation(), () -> {
+                        evaluationService.supprimer(selectedEvaluation);
+                        loadEvaluations();
                     });
                 });
             }
-
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
@@ -215,12 +130,55 @@ public class DisplayEvaluation {
             }
         });
 
-        loadHistorique();  // Load historical data into the table view
+        // Load initial data
+        loadEvaluations();
+
+        // Search bar listener
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> filterEvaluations(newValue));
     }
 
-    public void loadHistorique() {
-        historiqueList.clear();
-        historiqueList.addAll(historiqueClubService.recherche());  // Fetch list of historical data from the service
-        tableView.setItems(historiqueList);
+    public void loadEvaluations() {
+        evaluationList.clear();
+        evaluationList.addAll(evaluationService.recherche());
+        filteredList.clear();
+        filteredList.addAll(evaluationList);
+        tableView.setItems(filteredList);
+    }
+
+    private void filterEvaluations(String searchText) {
+        filteredList.clear();
+        if (searchText == null || searchText.isEmpty()) {
+            filteredList.addAll(evaluationList);
+        } else {
+            String lowerCaseFilter = searchText.toLowerCase();
+            for (EvaluationPhysique evaluation : evaluationList) {
+                if (String.valueOf(evaluation.getIdJoueur()).contains(lowerCaseFilter) ||
+                        dateFormat.format(evaluation.getDateEvaluation()).contains(lowerCaseFilter) ||
+                        evaluation.getEtatBlessure().toLowerCase().contains(lowerCaseFilter)) {
+                    filteredList.add(evaluation);
+                }
+            }
+        }
+        tableView.setItems(filteredList);
+    }
+
+    private void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    private void showConfirmation(String title, String header, String content, Runnable onConfirm) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                onConfirm.run();
+            }
+        });
     }
 }

@@ -9,8 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import models.Sport;  // Make sure to import the Sport model
-import services.SportService;  // Make sure to import the SportService
+import models.joueur.Sport;  // Make sure to import the Sport model
+import services.joueur.SportService;  // Make sure to import the SportService
 
 import java.io.IOException;
 
@@ -110,6 +110,18 @@ public class ModifySport {
         descriptionSportField.setText(sport.getDescription());
     }
 
+    private void loadScene(String fxmlPath, Button button) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            Stage stage = (Stage) button.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Failed to load FXML file: " + fxmlPath);
+        }
+    }
+
     @FXML
     void modifier(ActionEvent event) {
         if (nomSportField.getText().trim().isEmpty() || descriptionSportField.getText().trim().isEmpty()) {  // Corrected here
@@ -136,6 +148,10 @@ public class ModifySport {
             alert.setHeaderText("Modification réussie !");
             alert.setContentText("Les informations du sport ont été modifiées avec succès.");
             alert.showAndWait();
+
+            // Automatically return to DisplaySport after adding
+            loadScene("/joueur/DisplaySport.fxml", modifierButton);
+
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");

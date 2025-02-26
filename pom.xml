@@ -7,7 +7,6 @@
     <groupId>org.example</groupId>
     <artifactId>CRUD</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -35,12 +34,6 @@
             <artifactId>javafx-controls</artifactId>
             <version>20.0.2</version>
         </dependency>
-
-
-
-
-
-
     </dependencies>
 
 

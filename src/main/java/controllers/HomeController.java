@@ -41,9 +41,9 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    private void HandleJoueur() {
+    private void handleJoueur() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/DisplayJoueur.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/MainController.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) joueurButton.getScene().getWindow();

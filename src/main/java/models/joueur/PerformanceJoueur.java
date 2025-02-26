@@ -1,4 +1,4 @@
-package models;
+package models.joueur;
 
 public class PerformanceJoueur {
     private int idPerformance;

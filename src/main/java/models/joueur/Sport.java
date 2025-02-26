@@ -1,4 +1,4 @@
-package models;
+package models.joueur;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleIntegerProperty;

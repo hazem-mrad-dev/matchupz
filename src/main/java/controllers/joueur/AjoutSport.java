@@ -9,12 +9,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import models.Sport;
-import services.SportService;
+import models.joueur.Sport;
+import services.joueur.SportService;
 
 import java.io.IOException;
 
 public class AjoutSport {
+
+    @FXML
+    private Button Home;
 
     @FXML
     private Button ajoutSport;
@@ -27,6 +30,27 @@ public class AjoutSport {
 
     @FXML
     private TextField descriptionSportField;
+
+    @FXML
+    private void handleHome() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/MainController.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) Home.getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Failed to load the FXML file");
+            alert.setContentText("Details: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
 
     @FXML
     private void handleAnnulerButton() {
@@ -50,6 +74,18 @@ public class AjoutSport {
             alert.setHeaderText("Failed to load the FXML file");
             alert.setContentText("Details: " + e.getMessage());
             alert.showAndWait();
+        }
+    }
+
+    private void loadScene(String fxmlPath, Button button) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            Stage stage = (Stage) button.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Failed to load FXML file: " + fxmlPath);
         }
     }
 
@@ -91,6 +127,10 @@ public class AjoutSport {
             alert.setHeaderText("Sport ajouté avec succès !");
             alert.setContentText("Le sport " + nomSport + " a été ajouté.");
             alert.showAndWait();
+
+            // Automatically return to DisplaySport after adding
+            loadScene("/joueur/DisplaySport.fxml", ajoutSport);
+
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");

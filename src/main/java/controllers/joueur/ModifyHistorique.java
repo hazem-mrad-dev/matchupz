@@ -1,120 +1,125 @@
 package controllers.joueur;
 
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-import models.HistoriqueClub;
+import models.joueur.Club;
+import models.joueur.HistoriqueClub; // Assuming this is the correct class name
+import models.joueur.Joueur;
+import services.joueur.ClubService;
 import services.joueur.HistoriqueClubService;
+import services.joueur.JoueurService;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 public class ModifyHistorique {
+    @FXML private Button Home;
+    @FXML private Button modifierHistoriqueButton;
+    @FXML private Button annulerButton;
+    @FXML private ComboBox<String> idJoueurComboBox;
+    @FXML private ComboBox<String> idClubComboBox;
+    @FXML private DatePicker saisonDebutPicker;
+    @FXML private DatePicker saisonFinPicker;
 
-    @FXML
-    private TextField idJoueurField;
-
-    @FXML
-    private TextField nomSportField;
-
-    @FXML
-    private TextField saisonDebutField;
-
-    @FXML
-    private TextField saisonFinField;
-
-    @FXML
-    private Button modifierHistoriqueButton;
-
-    @FXML
-    private Button annulerButton;
-
-    private HistoriqueClub historiqueToModify;
     private HistoriqueClubService historiqueService = new HistoriqueClubService();
+    private JoueurService joueurService = new JoueurService();
+    private ClubService clubService = new ClubService();
+    private HistoriqueClub historiqueToModify;
 
-    // Method to set the historique object for modification
+    @FXML
+    private void initialize() {
+        idJoueurComboBox.setItems(FXCollections.observableArrayList(
+                joueurService.recherche().stream().map(j -> j.getIdJoueur() + " - " + j.getNom() + " " + j.getPrenom()).toList()
+        ));
+        idClubComboBox.setItems(FXCollections.observableArrayList(
+                clubService.recherche().stream().map(c -> c.getIdClub() + " - " + c.getNomClub()).toList()
+        ));
+    }
+
     public void setHistoriqueToModify(HistoriqueClub historique) {
         this.historiqueToModify = historique;
+        idJoueurComboBox.setValue(historique.getIdJoueur() + " - " + joueurService.recherche().stream()
+                .filter(j -> j.getIdJoueur() == historique.getIdJoueur())
+                .map(j -> j.getNom() + " " + j.getPrenom())
+                .findFirst().orElse(""));
+        idClubComboBox.setValue(historique.getIdClub() + " - " + clubService.recherche().stream()
+                .filter(c -> c.getIdClub() == historique.getIdClub())
+                .map(Club::getNomClub)
+                .findFirst().orElse(""));
+        saisonDebutPicker.setValue(historique.getSaisonDebut().toLocalDate());
+        saisonFinPicker.setValue(historique.getSaisonFin() != null ? historique.getSaisonFin().toLocalDate() : null);
+    }
 
-        // Pre-fill fields with existing data
-        idJoueurField.setText(String.valueOf(historique.getIdJoueur()));
-        nomSportField.setText(historique.getNomClub());
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        saisonDebutField.setText(dateFormat.format(historique.getSaisonDebut()));
-
-        if (historique.getSaisonFin() != null) {
-            saisonFinField.setText(dateFormat.format(historique.getSaisonFin()));
-        }
+    @FXML
+    private void handleHome() {
+        loadScene("/joueur/MainController.fxml", Home);
     }
 
     @FXML
     private void handleAnnulerButton() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/DisplayHistorique.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) annulerButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadScene("/joueur/DisplayHistorique.fxml", annulerButton);
     }
 
     @FXML
-    private void modifier(ActionEvent event) {
+    private void modifier() {
+        if (idJoueurComboBox.getValue() == null || idClubComboBox.getValue() == null || saisonDebutPicker.getValue() == null) {
+            showAlert("Erreur", "Champs obligatoires manquants", "Veuillez remplir tous les champs obligatoires.");
+            return;
+        }
+
         try {
-            String idJoueurString = idJoueurField.getText().trim();
-            String nomClub = nomSportField.getText().trim();
-            String saisonDebutString = saisonDebutField.getText().trim();
-            String saisonFinString = saisonFinField.getText().trim();
+            int idJoueur = Integer.parseInt(idJoueurComboBox.getValue().split(" - ")[0]);
+            int idClub = Integer.parseInt(idClubComboBox.getValue().split(" - ")[0]);
+            LocalDate saisonDebutLocal = saisonDebutPicker.getValue();
+            Date saisonDebut = Date.valueOf(saisonDebutLocal); // Convert to java.sql.Date
+            LocalDate saisonFinLocal = saisonFinPicker.getValue();
+            Date saisonFin = saisonFinLocal != null ? Date.valueOf(saisonFinLocal) : null; // Convert to java.sql.Date
 
-            // Validation
-            if (idJoueurString.isEmpty() || nomClub.isEmpty() || saisonDebutString.isEmpty()) {
-                showAlert("Erreur", "Veuillez remplir tous les champs obligatoires.", Alert.AlertType.ERROR);
-                return;
-            }
-
-            int idJoueur = Integer.parseInt(idJoueurString);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date saisonDebut = dateFormat.parse(saisonDebutString);
-            Date saisonFin = saisonFinString.isEmpty() ? null : dateFormat.parse(saisonFinString);
-
-            // Update existing historique object
             historiqueToModify.setIdJoueur(idJoueur);
-            historiqueToModify.setNomClub(nomClub);
+            historiqueToModify.setIdClub(idClub);
             historiqueToModify.setSaisonDebut(saisonDebut);
             historiqueToModify.setSaisonFin(saisonFin);
 
-            // Save the modifications
             historiqueService.modifier(historiqueToModify);
 
-            showAlert("Succès", "Historique modifié avec succès !", Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Succès");
+            alert.setHeaderText("Historique modifié avec succès !");
+            alert.setContentText("L'historique pour le joueur " + idJoueur + " et le club " + idClub + " a été modifié.");
+            alert.showAndWait();
 
-            // Redirect to DisplayHistorique.fxml
             handleAnnulerButton();
-
         } catch (NumberFormatException e) {
-            showAlert("Erreur de format", "L'ID du joueur doit être un nombre.", Alert.AlertType.ERROR);
+            showAlert("Erreur", "Valeur incorrecte", "Veuillez sélectionner des valeurs valides pour le joueur et le club.");
         } catch (Exception e) {
-            showAlert("Erreur", "Une erreur s'est produite : " + e.getMessage(), Alert.AlertType.ERROR);
-            e.printStackTrace();
+            showAlert("Erreur", "Une erreur est survenue", "Détails : " + e.getMessage());
         }
     }
 
-    private void showAlert(String title, String message, Alert.AlertType type) {
-        Alert alert = new Alert(type);
+    private void loadScene(String fxmlPath, Button button) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            Stage stage = (Stage) button.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Erreur", "Échec du chargement", "Détails : " + e.getMessage());
+        }
+    }
+
+    private void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
         alert.showAndWait();
     }
 }

@@ -1,6 +1,7 @@
-package services;
+package services.joueur;
 
-import models.EvaluationPhysique;
+import models.joueur.EvaluationPhysique;
+import services.IService;
 import utils.MyDataSource;
 
 

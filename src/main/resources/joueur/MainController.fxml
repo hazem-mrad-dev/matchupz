@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -16,6 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1114.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.joueur.MainController">
     <children>
@@ -57,7 +59,7 @@
                                                         <!-- VBox to hold multiple buttons -->
                                                         <VBox alignment="CENTER" spacing="0"> <!-- 'spacing="0"' minimizes the gap -->
                                                             <children>
-                                                                <Button onAction="#loadHome" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Overview">
+                                                                <Button alignment="CENTER" mnemonicParsing="false" onAction="#loadHome" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Overview">
                                                                     <font>
                                                                         <Font name="Montserrat Medium" size="12.0" />
                                                                     </font>
@@ -173,25 +175,61 @@
                                                 <String fx:value="shadow" />
                                             </styleClass>
                                  <children>
-                                    <GridPane layoutX="45.0" layoutY="242.0" prefHeight="103.0" prefWidth="800.0" AnchorPane.topAnchor="242.0">
+                                    <GridPane alignment="CENTER" hgap="20.0" layoutX="45.0" layoutY="79.0" prefHeight="494.0" prefWidth="800.0" AnchorPane.topAnchor="79.0">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                       </columnConstraints>
                                       <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="210.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="150.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="210.0" minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="107.60001220703123" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                          <RowConstraints />
                                       </rowConstraints>
                                        <children>
-                                          <Button onAction="#loadDisplayJoueur" mnemonicParsing="false" prefHeight="55.0" prefWidth="148.0" styleClass="top-entity-btn" text="Joueurs" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                                          <Button onAction="#loadDisplaySport" mnemonicParsing="false" prefHeight="55.0" prefWidth="148.0" styleClass="top-entity-btn" text="Sports" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                                          <Button onAction="#loadDisplayHistorique" mnemonicParsing="false" prefHeight="55.0" prefWidth="148.0" styleClass="top-entity-btn" text="Historique Clubs" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                                          <Button onAction="#loadDisplayPerformance" mnemonicParsing="false" prefHeight="55.0" prefWidth="148.0" styleClass="top-entity-btn" text="Performance Joueurs" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
-                                          <Button onAction="#loadDisplayEvaluation" mnemonicParsing="false" prefHeight="55.0" prefWidth="148.0" styleClass="top-entity-btn" text="Evaluation Joueurs" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
+                                          <Button mnemonicParsing="false" onAction="#loadDisplayJoueur" prefHeight="55.0" prefWidth="250.0" styleClass="top-entity-btn" text="Joueurs" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                          <Button mnemonicParsing="false" onAction="#loadDisplaySport" prefHeight="44.0" prefWidth="257.0" styleClass="top-entity-btn" text="Sports" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                          <Button mnemonicParsing="false" onAction="#loadDisplayHistorique" prefHeight="60.0" prefWidth="250.0" styleClass="top-entity-btn" text="Historique Clubs" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                          <Button mnemonicParsing="false" onAction="#loadDisplayPerformance" prefHeight="55.0" prefWidth="250.0" styleClass="top-entity-btn" text="Performance Joueurs" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                                          <Button mnemonicParsing="false" onAction="#loadDisplayEvaluation" prefHeight="55.0" prefWidth="250.0" styleClass="top-entity-btn" text="Evaluation Joueurs" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                                          <Button mnemonicParsing="false" onAction="#loadDisplayClub" prefHeight="52.0" prefWidth="247.0" styleClass="top-entity-btn" text="Club" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                                           <ImageView fitHeight="193.0" fitWidth="247.0" pickOnBounds="true" preserveRatio="false" styleClass="gridpane-image-view">
+                                               <image>
+                                                   <Image url="@../football_logos/photos_joueur/training1.png" />
+                                               </image>
+                                           </ImageView>
+                                           <ImageView fitHeight="193.0" fitWidth="247.0" pickOnBounds="true" GridPane.columnIndex="1" styleClass="gridpane-image-view">
+                                             <image>
+                                                <Image url="@../football_logos/photos_joueur/training2.png" />
+                                             </image></ImageView>
+                                          <ImageView fitHeight="192.0" fitWidth="247.0" pickOnBounds="true" GridPane.columnIndex="2" styleClass="gridpane-image-view">
+                                             <image>
+                                                <Image url="@../football_logos/photos_joueur/training3.png" />
+                                             </image></ImageView>
+                                          <ImageView fitHeight="192.0" fitWidth="247.0" pickOnBounds="true" GridPane.rowIndex="2" styleClass="gridpane-image-view">
+                                             <image>
+                                                <Image url="@../football_logos/photos_joueur/training4.png" />
+                                             </image></ImageView>
+                                          <ImageView fitHeight="198.0" fitWidth="247.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="gridpane-image-view">
+                                             <image>
+                                                <Image url="@../football_logos/photos_joueur/training5.png" />
+                                             </image></ImageView>
+                                          <ImageView fitHeight="193.0" fitWidth="248.0" pickOnBounds="true" GridPane.columnIndex="2" GridPane.rowIndex="2" styleClass="gridpane-image-view">
+                                             <image>
+                                                <Image url="@../football_logos/photos_joueur/training6.png" />
+                                             </image></ImageView>
                                        </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
                                     </GridPane>
+                                    <Text layoutX="226.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choisir l'Entité a Gérer" wrappingWidth="437.336669921875">
+                                       <font>
+                                          <Font name="Montserrat SemiBold" size="36.0" />
+                                       </font>
+                                    </Text>
                                  </children>
                                         </AnchorPane>
                                     </children>

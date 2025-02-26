@@ -1,106 +1,48 @@
-package models;
+package models.joueur;
 
 import javafx.beans.property.*;
-import java.util.Date;
 
 public class HistoriqueClub {
-    private IntegerProperty idHistorique;
-    private IntegerProperty idJoueur;
-    private StringProperty nomClub;
-    private ObjectProperty<Date> saisonDebut;
-    private ObjectProperty<Date> saisonFin;
+    private final IntegerProperty idHistorique = new SimpleIntegerProperty();
+    private final IntegerProperty idJoueur = new SimpleIntegerProperty();
+    private final IntegerProperty idClub = new SimpleIntegerProperty();
+    private final ObjectProperty<java.sql.Date> saisonDebut = new SimpleObjectProperty<>();
+    private final ObjectProperty<java.sql.Date> saisonFin = new SimpleObjectProperty<>();
 
-    // Constructor
-    public HistoriqueClub(int idHistorique, int idJoueur, String nomClub, Date saisonDebut, Date saisonFin) {
-        this.idHistorique = new SimpleIntegerProperty(idHistorique);
-        this.idJoueur = new SimpleIntegerProperty(idJoueur);
-        this.nomClub = new SimpleStringProperty(nomClub);
-        this.saisonDebut = new SimpleObjectProperty<>(saisonDebut);
-        this.saisonFin = new SimpleObjectProperty<>(saisonFin);
-    }
+    public HistoriqueClub() {}
 
-    public HistoriqueClub(int idJoueur, String nomClub, Date saisonDebut, Date saisonFin) {
-        this.idJoueur = new SimpleIntegerProperty(idJoueur);
-        this.nomClub = new SimpleStringProperty(nomClub);
-        this.saisonDebut = new SimpleObjectProperty<>(saisonDebut);
-        this.saisonFin = new SimpleObjectProperty<>(saisonFin);
-    }
-
-
-    // Default constructor
-    public HistoriqueClub() {
-        this.idHistorique = new SimpleIntegerProperty();
-        this.idJoueur = new SimpleIntegerProperty();
-        this.nomClub = new SimpleStringProperty();
-        this.saisonDebut = new SimpleObjectProperty<>();
-        this.saisonFin = new SimpleObjectProperty<>();
-    }
-
-    // Constructor for easier instantiation
-    public HistoriqueClub(String nomClub, Date saisonDebut, Date saisonFin) {
-        this.nomClub = new SimpleStringProperty(nomClub);
-        this.saisonDebut = new SimpleObjectProperty<>(saisonDebut);
-        this.saisonFin = new SimpleObjectProperty<>(saisonFin);
-    }
-
-    // Getters and setters (using JavaFX properties)
-    public IntegerProperty idHistoriqueProperty() {
-        return idHistorique;
-    }
-
-    public int getIdHistorique() {
-        return idHistorique.get();
-    }
-
-    public void setIdHistorique(int idHistorique) {
-        this.idHistorique.set(idHistorique);
-    }
-
-    public IntegerProperty idJoueurProperty() {
-        return idJoueur;
-    }
-
-    public int getIdJoueur() {
-        return idJoueur.get();
-    }
-
-    public void setIdJoueur(int idJoueur) {
+    public HistoriqueClub(int idJoueur, int idClub, java.sql.Date saisonDebut, java.sql.Date saisonFin) {
         this.idJoueur.set(idJoueur);
-    }
-
-    public StringProperty nomClubProperty() {
-        return nomClub;
-    }
-
-    public String getNomClub() {
-        return nomClub.get();
-    }
-
-    public void setNomClub(String nomClub) {
-        this.nomClub.set(nomClub);
-    }
-
-    public ObjectProperty<Date> saisonDebutProperty() {
-        return saisonDebut;
-    }
-
-    public Date getSaisonDebut() {
-        return saisonDebut.get();
-    }
-
-    public void setSaisonDebut(Date saisonDebut) {
+        this.idClub.set(idClub);
         this.saisonDebut.set(saisonDebut);
-    }
-
-    public ObjectProperty<Date> saisonFinProperty() {
-        return saisonFin;
-    }
-
-    public Date getSaisonFin() {
-        return saisonFin.get();
-    }
-
-    public void setSaisonFin(Date saisonFin) {
         this.saisonFin.set(saisonFin);
     }
+
+    public HistoriqueClub(int idHistorique, int idJoueur, int idClub, java.sql.Date saisonDebut, java.sql.Date saisonFin) {
+        this.idHistorique.set(idHistorique);
+        this.idJoueur.set(idJoueur);
+        this.idClub.set(idClub);
+        this.saisonDebut.set(saisonDebut);
+        this.saisonFin.set(saisonFin);
+    }
+
+    public int getIdHistorique() { return idHistorique.get(); }
+    public void setIdHistorique(int idHistorique) { this.idHistorique.set(idHistorique); }
+    public IntegerProperty idHistoriqueProperty() { return idHistorique; }
+
+    public int getIdJoueur() { return idJoueur.get(); }
+    public void setIdJoueur(int idJoueur) { this.idJoueur.set(idJoueur); }
+    public IntegerProperty idJoueurProperty() { return idJoueur; }
+
+    public int getIdClub() { return idClub.get(); }
+    public void setIdClub(int idClub) { this.idClub.set(idClub); }
+    public IntegerProperty idClubProperty() { return idClub; }
+
+    public java.sql.Date getSaisonDebut() { return saisonDebut.get(); }
+    public void setSaisonDebut(java.sql.Date saisonDebut) { this.saisonDebut.set(saisonDebut); }
+    public ObjectProperty<java.sql.Date> saisonDebutProperty() { return saisonDebut; }
+
+    public java.sql.Date getSaisonFin() { return saisonFin.get(); }
+    public void setSaisonFin(java.sql.Date saisonFin) { this.saisonFin.set(saisonFin); }
+    public ObjectProperty<java.sql.Date> saisonFinProperty() { return saisonFin; }
 }

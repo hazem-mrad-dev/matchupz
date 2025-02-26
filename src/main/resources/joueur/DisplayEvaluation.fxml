@@ -16,7 +16,8 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1114.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.joueur.DisplayHistorique">
+<?import javafx.scene.control.TextField?>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1114.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.joueur.DisplayEvaluation">
     <children>
         <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0" stylesheets="@../dashboardDesign.css">
             <children>
@@ -56,7 +57,7 @@
                                                         <!-- VBox to hold multiple buttons -->
                                                         <VBox alignment="CENTER" spacing="0"> <!-- 'spacing="0"' minimizes the gap -->
                                                             <children>
-                                                                <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleHome" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Overview">
+                                                                <Button fx:id="homeButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleHome" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Overview">
                                                                     <font>
                                                                         <Font name="Montserrat Medium" size="12.0" />
                                                                     </font>
@@ -123,7 +124,7 @@
                                                                         <Font name="Montserrat Medium" size="12.0" />
                                                                     </font>
                                                                 </Button>
-                                                                <Button fx:id="joueurButton" alignment="CENTER" mnemonicParsing="false" onAction="#HandleJoueur" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Teams">
+                                                                <Button fx:id="joueurButton" onAction="#handleJoueur" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Teams">
                                                                     <font>
                                                                         <Font name="Montserrat Medium" size="12.0" />
                                                                     </font>
@@ -164,16 +165,19 @@
                     <center>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                             <children>
+                                <TextField fx:id="searchField" layoutX="16.0" layoutY="30.0" prefWidth="300.0" promptText="Search by Player ID, Date, or Injury Status" />
                                 <!-- TableView for Entity -->
                                 <TableView fx:id="tableView" layoutX="16.0" layoutY="71.0" prefHeight="336.0" prefWidth="870.0">
                                     <columns>
-                                        <TableColumn fx:id="idHistoriqueColumn" prefWidth="86.39998245239258" text="ID Historique" />
-                                        <TableColumn fx:id="idJoueurColumn" prefWidth="88.00003051757812" text="ID Joueur" />
-                                        <TableColumn fx:id="nomClubColumn" prefWidth="135.9999237060547" text="Nom Club" />
-                                        <TableColumn fx:id="saisonDebutColumn" prefWidth="163.99993896484375" text="Saison Debut" />
-                                        <TableColumn fx:id="saisonFinColumn" prefWidth="135.199951171875" text="Saison Fin" />
-                                        <TableColumn fx:id="modifierColumn" prefWidth="170.0" text="Modifier" />
-                                        <TableColumn fx:id="deleteColumn" prefWidth="170.0" text="Delete" />
+                                        <TableColumn fx:id="idEvaluationColumn" prefWidth="90.0" text="ID Évaluation" />
+                                        <TableColumn fx:id="idJoueurColumn" prefWidth="88.0" text="ID Joueur" />
+                                        <TableColumn fx:id="dateEvaluationColumn" prefWidth="140.0" text="Date Évaluation" />
+                                        <TableColumn fx:id="niveauEnduranceColumn" prefWidth="120.0" text="Niveau Endurance" />
+                                        <TableColumn fx:id="forcePhysiqueColumn" prefWidth="120.0" text="Force Physique" />
+                                        <TableColumn fx:id="vitesseColumn" prefWidth="100.0" text="Vitesse" />
+                                        <TableColumn fx:id="etatBlessureColumn" prefWidth="120.0" text="État Blessure" />
+                                        <TableColumn fx:id="modifierColumn" prefWidth="100.0" text="Modifier" />
+                                        <TableColumn fx:id="deleteColumn" prefWidth="100.0" text="Supprimer" />
                                     </columns>
                                 </TableView>
                                 <!-- Action buttons for operations (Add, Analytics, Statistics) -->
@@ -182,7 +186,7 @@
                                         <!-- Add Sport Button -->
                                         <AnchorPane layoutX="14.0" layoutY="23.0" prefHeight="131.0" prefWidth="250.0" stylesheets="@../dashboardDesign.css">
                                             <children>
-                                                <Button fx:id="addHistoriqueButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleAddHistoriqueButton" prefHeight="35.0" prefWidth="170.0" styleClass="btn-primary" text="Add Historique" />
+                                                <Button fx:id="addEvaluationButton" onAction="#handleEvaluationButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" styleClass="btn-primary" text="Add Evaluation" />
                                             </children>
                                             <styleClass>
                                                 <String fx:value="card" />

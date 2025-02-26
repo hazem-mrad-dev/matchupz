@@ -10,8 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import models.Sport;
-import services.*;
+import models.joueur.Sport;
+import services.joueur.SportService;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class DisplaySport {
     @FXML
     private Button joueurButton;
     @FXML
-    private Button Home;
+    private Button homeButton;
     @FXML
     private Button addSportButton;
     @FXML
@@ -44,7 +44,7 @@ public class DisplaySport {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/MainController.fxml"));
             Parent root = loader.load();
 
-            Stage stage = (Stage) Home.getScene().getWindow();
+            Stage stage = (Stage) homeButton.getScene().getWindow();
 
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -186,7 +186,7 @@ public class DisplaySport {
 
         // Delete column with confirmation dialog
         deleteColumn.setCellFactory(param -> new TableCell<Sport, Void>() {
-            private final Button btn = new Button("Delete");
+            private final Button btn = new Button("Supprimer");
 
             {
                 btn.setId("btn-delete"); // Assign the CSS ID for styling

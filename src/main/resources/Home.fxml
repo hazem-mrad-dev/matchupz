@@ -121,7 +121,7 @@
                                                                         <Font name="Montserrat Medium" size="12.0" />
                                                                     </font>
                                                                 </Button>
-                                                                <Button fx:id="joueurButton"  onAction="#HandleJoueur" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Teams">
+                                                                <Button fx:id="joueurButton"  onAction="#handleJoueur" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Teams">
                                                                     <font>
                                                                         <Font name="Montserrat Medium" size="12.0" />
                                                                     </font>

@@ -1,199 +1,110 @@
 package controllers.joueur;
 
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-import models.Joueur;
-import services.joueur.JoueurService;
-
-import javafx.fxml.FXML;
-import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import models.joueur.Joueur;
+import services.joueur.JoueurService;
+import services.joueur.SportService;
 
+import java.io.File;
 import java.io.IOException;
-import java.sql.Date; // Ensure this is imported
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class AjoutJoueur {
 
-    @FXML
-    private Button annulerButton;
+    @FXML private Button homeButton;
+    @FXML private Button annulerButton;
+    @FXML private Button ajouterButton;
+    @FXML private Button selectPhotoButton; // New button for file selection
+    @FXML private TextField nomField;
+    @FXML private TextField prenomField;
+    @FXML private DatePicker dateNaissancePicker;
+    @FXML private ComboBox<String> posteComboBox;
+    @FXML private TextField tailleField;
+    @FXML private TextField poidsField;
+    @FXML private ComboBox<String> statutComboBox;
+    @FXML private TextField emailField;
+    @FXML private TextField telephoneField;
+    @FXML private ComboBox<String> sportComboBox;
+    @FXML private TextField profilePictureField;
+
+    private JoueurService joueurService = new JoueurService();
+    private SportService sportService = new SportService();
 
     @FXML
-    private TextField nomField;
+    private void initialize() {
+        sportComboBox.setItems(FXCollections.observableArrayList(
+                sportService.recherche().stream().map(s -> s.getIdSport() + " - " + s.getNomSport()).toList()
+        ));
+        posteComboBox.setItems(FXCollections.observableArrayList(
+                "GK", "RB", "LB", "RWB", "LWB", "SW", "DM", "CM", "AM", "RM", "LM", "RW", "LW", "CF", "ST", "SS"
+        ));
+        statutComboBox.setItems(FXCollections.observableArrayList("Actif", "Blessé", "Suspendu", ""));
+    }
 
     @FXML
-    private TextField prenomField;
-
-    @FXML
-    private TextField dateNaissanceField; // Change to DatePicker
-
-    @FXML
-    private TextField posteField; // Changed back to TextField
-
-    @FXML
-    private TextField tailleField; // Changed back to TextField
-
-    @FXML
-    private TextField poidsField; // Changed back to TextField
-
-    @FXML
-    private TextField statutField; // Changed back to TextField
-
-    @FXML
-    private TextField emailField;
-
-    @FXML
-    private TextField telephoneField;
-
-    @FXML
-    private TextField idSportField;
-
-    @FXML
-    private Button ajouterButton;
+    private void handleHome() {
+        loadScene("/joueur/MainController.fxml", homeButton);
+    }
 
     @FXML
     private void handleAnnulerButton() {
-        try {
-            // Load the FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/DisplayJoueur.fxml"));
-            Parent root = loader.load();
+        loadScene("/joueur/DisplayJoueur.fxml", annulerButton);
+    }
 
-            // Get the current stage
-            Stage stage = (Stage) annulerButton.getScene().getWindow();
-
-            // Set the new scene
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle the error (e.g., show an alert)
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Failed to load the FXML file");
-            alert.setContentText("Details: " + e.getMessage());
-            alert.showAndWait();
+    @FXML
+    private void selectPhoto() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir une Photo de Profil");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
+        );
+        File selectedFile = fileChooser.showOpenDialog(ajouterButton.getScene().getWindow());
+        if (selectedFile != null) {
+            profilePictureField.setText(selectedFile.getAbsolutePath());
         }
     }
 
     @FXML
-    void ajouter(ActionEvent event) {
-        if (nomField.getText().trim().isEmpty() || prenomField.getText().trim().isEmpty() ||
-                dateNaissanceField.getText().trim().isEmpty() || posteField.getText().trim().isEmpty() ||
-                tailleField.getText().trim().isEmpty() || poidsField.getText().trim().isEmpty() ||
-                statutField.getText().trim().isEmpty() || emailField.getText().trim().isEmpty() ||
-                telephoneField.getText().trim().isEmpty() || idSportField.getText().trim().isEmpty()) {
+    private void ajouter() {
+        if (nomField.getText().trim().isEmpty() || prenomField.getText().trim().isEmpty() || dateNaissancePicker.getValue() == null ||
+                sportComboBox.getValue() == null || posteComboBox.getValue() == null || tailleField.getText().trim().isEmpty() ||
+                poidsField.getText().trim().isEmpty() || statutComboBox.getValue() == null || emailField.getText().trim().isEmpty() ||
+                telephoneField.getText().trim().isEmpty()) {
 
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Champs obligatoires manquants");
-            alert.setContentText("Veuillez remplir tous les champs avant d'ajouter un joueur.");
-            alert.showAndWait();
+            showAlert("Erreur", "Champs obligatoires manquants", "Veuillez remplir tous les champs.");
             return;
         }
 
         try {
-            // Retrieve values from the fields
             String nom = nomField.getText().trim();
             String prenom = prenomField.getText().trim();
-            String dateNaissanceStr = dateNaissanceField.getText().trim(); // Get date from TextField
-            String poste = posteField.getText().trim();
+            LocalDate dateNaissanceLocal = dateNaissancePicker.getValue();
+            java.util.Date dateNaissance = java.util.Date.from(dateNaissanceLocal.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            String poste = posteComboBox.getValue();
             float taille = Float.parseFloat(tailleField.getText().trim());
             float poids = Float.parseFloat(poidsField.getText().trim());
-            String statut = statutField.getText().trim();
+            String statut = statutComboBox.getValue();
             String email = emailField.getText().trim();
             String telephone = telephoneField.getText().trim();
-            int idSport = Integer.parseInt(idSportField.getText().trim());
+            int idSport = Integer.parseInt(sportComboBox.getValue().split(" - ")[0]);
+            String nomSport = sportComboBox.getValue().split(" - ")[1];
+            String profilePicturePath = profilePictureField.getText().trim().isEmpty() ? null : profilePictureField.getText().trim();
 
-            // Validate poste
-            String[] validPostes = {"GK", "RB", "LB", "RWB", "LWB", "SW", "DM", "CM", "AM", "RM", "LM", "RW", "LW", "CF", "ST", "SS"};
-            boolean isPosteValid = false;
-            for (String validPoste : validPostes) {
-                if (poste.equals(validPoste)
-                ) {
-                    isPosteValid = true;
-                    break;
-                }
-            }
-            if (!isPosteValid) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur de saisie");
-                alert.setHeaderText("Poste invalide");
-                alert.setContentText("Veuillez entrer un poste valide : " + String.join(", ", validPostes) + ".");
-                alert.showAndWait();
-                return;
-            }
+            if (taille < 1.50 || taille > 2.50) throw new NumberFormatException("Taille must be between 1.50m and 2.50m");
+            if (poids < 60 || poids > 110) throw new NumberFormatException("Poids must be between 60kg and 110kg");
+            if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) throw new IllegalArgumentException("Invalid email format");
+            if (!telephone.matches("^\\+?[1-9][0-9]{1,14}$")) throw new IllegalArgumentException("Invalid phone format");
 
-            String[] validStatuts = {"Actif", "Blessé", "Suspendu", ""};
-            boolean isStatutValid = false;
-            for (String validStatut : validStatuts) {
-                if (statut.equals(validStatut)) {
-                    isStatutValid = true;
-                    break;
-                }
-            }
-            if (!isStatutValid) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur de saisie");
-                alert.setHeaderText("Statut invalide");
-                alert.setContentText("Veuillez entrer un statut valide : " + String.join(", ", validStatuts) + ".");
-                alert.showAndWait();
-                return;
-            }
-
-            if (taille < 1.50 || taille > 2.50) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur de saisie");
-                alert.setHeaderText("Taille invalide");
-                alert.setContentText("La taille doit être comprise entre 1.50 m et 2.50 m.");
-                alert.showAndWait();
-                return;
-            }
-
-            if (poids < 60 || poids > 110) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur de saisie");
-                alert.setHeaderText("Poids invalide");
-                alert.setContentText("Le poids doit être compris entre 60 kg et 110 kg.");
-                alert.showAndWait();
-                return;
-            }
-
-            String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
-            if (!email.matches(emailRegex)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur de saisie");
-                alert.setHeaderText("Email invalide");
-                alert.setContentText("Veuillez entrer une adresse e-mail valide.");
-                alert.showAndWait();
-                return;
-            }
-
-            String telephoneRegex = "^\\+?[1-9][0-9]{1,14}$";
-            if (!telephone.matches(telephoneRegex)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur de saisie");
-                alert.setHeaderText("Téléphone invalide");
-                alert.setContentText("Veuillez entrer un numéro de téléphone valide.");
-                alert.showAndWait();
-                return;
-            }
-
-            java.sql.Date dateNaissance;
-            try {
-                dateNaissance = java.sql.Date.valueOf(dateNaissanceStr); // Ensure the format is valid
-            } catch (IllegalArgumentException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur de format");
-                alert.setHeaderText("Format de date invalide");
-                alert.setContentText("Veuillez entrer la date dans le format yyyy-mm-dd.");
-                alert.showAndWait();
-                return;
-            }
-            Joueur joueur = new Joueur(nom, prenom, dateNaissance, poste, taille, poids, statut, email, telephone, idSport);
-            JoueurService joueurService = new JoueurService();
+            Joueur joueur = new Joueur(idSport, nomSport, nom, prenom, dateNaissance, poste, taille, poids, statut, email, telephone, profilePicturePath);
             joueurService.ajouter(joueur);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -201,18 +112,34 @@ public class AjoutJoueur {
             alert.setHeaderText("Joueur ajouté avec succès !");
             alert.setContentText("Le joueur " + nom + " " + prenom + " a été ajouté.");
             alert.showAndWait();
+
+            handleAnnulerButton();
         } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur de format");
-            alert.setHeaderText("Valeur incorrecte");
-            alert.setContentText("Veuillez entrer des valeurs numériques valides pour la taille, le poids et l'ID du sport.");
-            alert.showAndWait();
+            showAlert("Erreur", "Valeur incorrecte", e.getMessage() != null ? e.getMessage() : "Veuillez entrer des valeurs numériques valides.");
+        } catch (IllegalArgumentException e) {
+            showAlert("Erreur", "Entrée invalide", e.getMessage());
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Une erreur est survenue");
-            alert.setContentText("Détails : " + e.getMessage());
-            alert.showAndWait();
+            showAlert("Erreur", "Une erreur est survenue", e.getMessage());
         }
+    }
+
+    private void loadScene(String fxmlPath, Button button) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            Stage stage = (Stage) button.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Erreur", "Échec du chargement", e.getMessage());
+        }
+    }
+
+    private void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

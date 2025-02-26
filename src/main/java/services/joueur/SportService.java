@@ -1,6 +1,7 @@
-package services;
+package services.joueur;
 
-import models.Sport;
+import models.joueur.Sport;
+import services.IService;
 import utils.MyDataSource;
 
 

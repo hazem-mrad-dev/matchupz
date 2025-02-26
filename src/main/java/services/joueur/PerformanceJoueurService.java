@@ -1,6 +1,6 @@
 package services.joueur;
 
-import models.PerformanceJoueur;
+import models.joueur.PerformanceJoueur;
 import services.IService;
 import utils.MyDataSource;
 
