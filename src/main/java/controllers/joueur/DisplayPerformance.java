@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.joueur.PerformanceJoueur;
-import services.joueur.PerformanceJoueurService; // Corrected to match previous context
+import services.joueur.PerformanceJoueurService;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -19,7 +19,8 @@ public class DisplayPerformance {
     @FXML private Button joueurButton;
     @FXML private Button homeButton;
     @FXML private Button addPerformanceButton;
-    @FXML private Button modifierPeformanceButton;
+    @FXML private Button searchButton; // Added for search functionality
+    @FXML private TextField searchField; // Added for search functionality
     @FXML private TableView<PerformanceJoueur> tableView;
     @FXML private TableColumn<PerformanceJoueur, Integer> idPerformanceColumn;
     @FXML private TableColumn<PerformanceJoueur, Integer> idJoueurColumn;
@@ -143,7 +144,6 @@ public class DisplayPerformance {
         // Delete column with confirmation dialog
         deleteColumn.setCellFactory(param -> new TableCell<PerformanceJoueur, Void>() {
             private final Button btn = new Button("Supprimer");
-
             {
                 btn.setId("btn-delete");
                 btn.setOnAction(event -> {
@@ -163,6 +163,14 @@ public class DisplayPerformance {
             }
         });
 
+        // Search button action
+        searchButton.setOnAction(event -> handleSearch());
+
+        // Optional: Real-time filtering as user types
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterPerformances(newValue);
+        });
+
         loadPerformances();
     }
 
@@ -170,6 +178,27 @@ public class DisplayPerformance {
         performanceList.clear();
         performanceList.addAll(performanceService.recherche());
         tableView.setItems(performanceList);
+    }
+
+    @FXML
+    private void handleSearch() {
+        filterPerformances(searchField.getText());
+    }
+
+    private void filterPerformances(String searchText) {
+        if (searchText == null || searchText.trim().isEmpty()) {
+            tableView.setItems(performanceList);
+        } else {
+            ObservableList<PerformanceJoueur> filteredList = FXCollections.observableArrayList();
+            String lowerCaseFilter = searchText.toLowerCase().trim();
+            for (PerformanceJoueur performance : performanceList) {
+                if (String.valueOf(performance.getIdJoueur()).contains(lowerCaseFilter) ||
+                        performance.getSaison().toLowerCase().contains(lowerCaseFilter)) {
+                    filteredList.add(performance);
+                }
+            }
+            tableView.setItems(filteredList);
+        }
     }
 
     private void showError(String header, Exception e) {

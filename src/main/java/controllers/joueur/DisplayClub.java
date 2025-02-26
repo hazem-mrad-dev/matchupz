@@ -19,6 +19,8 @@ public class DisplayClub {
     @FXML private Button homeButton;
     @FXML private Button addClubButton;
     @FXML private Button joueurButton;
+    @FXML private Button searchButton; // Added for search functionality
+    @FXML private TextField searchField; // Added for search functionality
     @FXML private TableView<Club> tableView;
     @FXML private TableColumn<Club, Integer> idColumn;
     @FXML private TableColumn<Club, String> nomColumn;
@@ -135,6 +137,12 @@ public class DisplayClub {
             }
         });
 
+        // Search button action
+        searchButton.setOnAction(event -> handleSearch());
+
+        // Optional: Real-time filtering as user types
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> filterClubs(newValue));
+
         loadClubs();
     }
 
@@ -142,6 +150,27 @@ public class DisplayClub {
         clubList.clear();
         clubList.addAll(clubService.recherche());
         tableView.setItems(clubList);
+    }
+
+    @FXML
+    private void handleSearch() {
+        filterClubs(searchField.getText());
+    }
+
+    private void filterClubs(String searchText) {
+        if (searchText == null || searchText.trim().isEmpty()) {
+            tableView.setItems(clubList);
+        } else {
+            ObservableList<Club> filteredList = FXCollections.observableArrayList();
+            String lowerCaseFilter = searchText.toLowerCase().trim();
+            for (Club club : clubList) {
+                if (String.valueOf(club.getIdClub()).contains(lowerCaseFilter) ||
+                        club.getNomClub().toLowerCase().contains(lowerCaseFilter)) {
+                    filteredList.add(club);
+                }
+            }
+            tableView.setItems(filteredList);
+        }
     }
 
     private void showAlert(String title, String header, String content) {

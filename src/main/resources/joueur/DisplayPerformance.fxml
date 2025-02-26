@@ -6,11 +6,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -22,6 +24,7 @@
             <children>
                 <BorderPane layoutX="79.0" layoutY="100.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <left>
+                        <!-- Left navigation pane remains unchanged -->
                         <AnchorPane prefHeight="555.0" prefWidth="211.0" BorderPane.alignment="CENTER">
                             <children>
                                 <AnchorPane prefHeight="555.0" prefWidth="207.0" styleClass="nav-form" stylesheets="@../dashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -47,14 +50,12 @@
                                         </Label>
                                         <Accordion layoutX="-1.0" layoutY="189.0" prefHeight="250.0" prefWidth="200.0">
                                             <panes>
-                                                <!-- Home TitledPane -->
                                                 <TitledPane animated="false" prefHeight="242.0" prefWidth="177.0" text="Home" textFill="WHITE">
                                                     <font>
                                                         <Font name="Montserrat ExtraBold" size="12.0" />
                                                     </font>
                                                     <content>
-                                                        <!-- VBox to hold multiple buttons -->
-                                                        <VBox alignment="CENTER" spacing="0"> <!-- 'spacing="0"' minimizes the gap -->
+                                                        <VBox alignment="CENTER" spacing="0">
                                                             <children>
                                                                 <Button fx:id="homeButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleHome" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Overview">
                                                                     <font>
@@ -70,8 +71,6 @@
                                                         </VBox>
                                                     </content>
                                                 </TitledPane>
-
-                                                <!-- Responsable Financier TitledPane -->
                                                 <TitledPane animated="false" prefHeight="242.0" prefWidth="177.0" text="Responsable Financier" textFill="WHITE">
                                                     <font>
                                                         <Font name="Montserrat ExtraBold" size="12.0" />
@@ -89,8 +88,6 @@
                                                         </VBox>
                                                     </content>
                                                 </TitledPane>
-
-                                                <!-- Responsable Logistique TitledPane -->
                                                 <TitledPane animated="false" prefHeight="242.0" prefWidth="177.0" text="Responsable Logistique" textFill="WHITE">
                                                     <font>
                                                         <Font name="Montserrat ExtraBold" size="12.0" />
@@ -112,8 +109,6 @@
                                                         </VBox>
                                                     </content>
                                                 </TitledPane>
-
-                                                <!-- Responsable Sportive TitledPane -->
                                                 <TitledPane animated="false" text="Responsable Sportive" textFill="WHITE">
                                                     <content>
                                                         <VBox alignment="CENTER" spacing="0">
@@ -164,7 +159,18 @@
                     <center>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                             <children>
-                                <!-- TableView for Entity -->
+                                <!-- Search Bar with Button -->
+                                <HBox alignment="CENTER_LEFT" layoutX="16.0" layoutY="20.0" prefHeight="40.0" prefWidth="870.0" spacing="10.0">
+                                    <children>
+                                        <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="188.0" styleClass="btn-primary" text="Rechercher 🔎" onAction="#handleSearch" />
+                                        <TextField fx:id="searchField" prefHeight="34.0" prefWidth="672.0" promptText="Entrez ID Joueur ou Saison">
+                                            <styleClass>
+                                                <String fx:value="search-field" />
+                                            </styleClass>
+                                        </TextField>
+                                    </children>
+                                </HBox>
+                                <!-- Adjusted TableView position -->
                                 <TableView fx:id="tableView" layoutX="16.0" layoutY="71.0" prefHeight="336.0" prefWidth="870.0">
                                     <columns>
                                         <TableColumn fx:id="idPerformanceColumn" text="ID Performance" prefWidth="100.0" />
@@ -180,10 +186,8 @@
                                         <TableColumn fx:id="deleteColumn" text="Delete" prefWidth="100.0" />
                                     </columns>
                                 </TableView>
-                                <!-- Action buttons for operations (Add, Analytics, Statistics) -->
                                 <AnchorPane layoutX="0.0" layoutY="417.0" prefHeight="178.0" prefWidth="902.0">
                                     <children>
-                                        <!-- Add Sport Button -->
                                         <AnchorPane layoutX="14.0" layoutY="23.0" prefHeight="131.0" prefWidth="250.0" stylesheets="@../dashboardDesign.css">
                                             <children>
                                                 <Button fx:id="addPerformanceButton" onAction="#handlePerformanceButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" styleClass="btn-primary" text="Add Performance" />
@@ -193,8 +197,6 @@
                                                 <String fx:value="shadow" />
                                             </styleClass>
                                         </AnchorPane>
-
-                                        <!-- Analytics Button -->
                                         <AnchorPane layoutX="326.0" layoutY="23.0" prefHeight="131.0" prefWidth="250.0" stylesheets="@../dashboardDesign.css">
                                             <children>
                                                 <Button fx:id="analyticsButton" layoutX="58.0" layoutY="48.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="134.0" styleClass="btn-primary" text="Analytics" />
@@ -204,8 +206,6 @@
                                                 <String fx:value="shadow" />
                                             </styleClass>
                                         </AnchorPane>
-
-                                        <!-- Statistics Button -->
                                         <AnchorPane layoutX="637.0" layoutY="23.0" prefHeight="131.0" prefWidth="250.0" stylesheets="@../dashboardDesign.css">
                                             <children>
                                                 <Button fx:id="statisticsButton" layoutX="58.0" layoutY="48.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="134.0" styleClass="btn-primary" text="Statistics" />

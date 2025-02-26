@@ -160,6 +160,18 @@
                     <center>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                             <children>
+                                <!-- Search Bar with Button -->
+                                <HBox alignment="CENTER_LEFT" layoutX="16.0" layoutY="20.0" prefHeight="40.0" prefWidth="870.0" spacing="10.0">
+                                    <children>
+                                        <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="188.0" styleClass="btn-primary" text="Rechercher 🔎" onAction="#handleSearch" />
+                                        <TextField fx:id="searchField" prefHeight="34.0" prefWidth="672.0" promptText="Entrez ID Club ou Nom Club">
+                                            <styleClass>
+                                                <String fx:value="search-field" />
+                                            </styleClass>
+                                        </TextField>
+                                    </children>
+                                </HBox>
+                                <!-- Adjusted TableView position -->
                                 <TableView fx:id="tableView" layoutX="16.0" layoutY="71.0" prefHeight="336.0" prefWidth="870.0">
                                     <columns>
                                         <TableColumn fx:id="idColumn" prefWidth="76.8" text="ID Club"/>

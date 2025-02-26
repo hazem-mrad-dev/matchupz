@@ -21,6 +21,8 @@ public class DisplayHistorique {
     @FXML private Button joueurButton;
     @FXML private Button homeButton;
     @FXML private Button addHistoriqueButton;
+    @FXML private Button searchButton; // Added for search functionality
+    @FXML private TextField searchField; // Added for search functionality
     @FXML private TableView<HistoriqueClub> tableView;
     @FXML private TableColumn<HistoriqueClub, Integer> idHistoriqueColumn;
     @FXML private TableColumn<HistoriqueClub, Integer> idJoueurColumn;
@@ -148,6 +150,12 @@ public class DisplayHistorique {
             }
         });
 
+        // Search button action
+        searchButton.setOnAction(event -> handleSearch());
+
+        // Real-time search listener
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> filterHistorique(newValue));
+
         loadHistorique();
     }
 
@@ -155,6 +163,35 @@ public class DisplayHistorique {
         historiqueList.clear();
         historiqueList.addAll(historiqueClubService.recherche());
         tableView.setItems(historiqueList);
+    }
+
+    @FXML
+    private void handleSearch() {
+        filterHistorique(searchField.getText());
+    }
+
+    private void filterHistorique(String searchText) {
+        if (searchText == null || searchText.trim().isEmpty()) {
+            tableView.setItems(historiqueList);
+        } else {
+            ObservableList<HistoriqueClub> filteredList = FXCollections.observableArrayList();
+            String lowerCaseFilter = searchText.toLowerCase().trim();
+            for (HistoriqueClub historique : historiqueList) {
+                String nomClub = clubService.recherche().stream()
+                        .filter(club -> club.getIdClub() == historique.getIdClub())
+                        .map(Club::getNomClub)
+                        .findFirst()
+                        .orElse("Unknown Club").toLowerCase();
+                String saisonFin = historique.getSaisonFin() != null ? dateFormat.format(historique.getSaisonFin()) : "";
+                if (String.valueOf(historique.getIdJoueur()).contains(lowerCaseFilter) ||
+                        nomClub.contains(lowerCaseFilter) ||
+                        dateFormat.format(historique.getSaisonDebut()).contains(lowerCaseFilter) ||
+                        saisonFin.contains(lowerCaseFilter)) {
+                    filteredList.add(historique);
+                }
+            }
+            tableView.setItems(filteredList);
+        }
     }
 
     private void showAlert(String title, String header, String content) {
