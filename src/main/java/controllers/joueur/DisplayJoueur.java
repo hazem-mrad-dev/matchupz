@@ -23,8 +23,7 @@ public class DisplayJoueur {
     @FXML private Button joueurButton;
     @FXML private Button homeButton;
     @FXML private Button addJoueurButton;
-    @FXML private Button searchButton;
-    @FXML private TextField searchField; // Add this
+    @FXML private Button trackPlayersButton;
     @FXML private TableView<Joueur> tableView;
     @FXML private TableColumn<Joueur, Integer> idColumn;
     @FXML private TableColumn<Joueur, Integer> idSportColumn;
@@ -61,6 +60,11 @@ public class DisplayJoueur {
         loadScene("/joueur/AjoutJoueur.fxml", addJoueurButton);
     }
 
+    @FXML
+    private void handleTrackPlayers() {
+        loadScene("/joueur/TrackPlayers.fxml", trackPlayersButton);
+    }
+
     private void loadScene(String fxmlPath, Button button) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -89,8 +93,6 @@ public class DisplayJoueur {
 
     @FXML
     public void initialize() {
-        // Existing column setup code remains unchanged...
-
         idColumn.setCellValueFactory(new PropertyValueFactory<>("idJoueur"));
         idSportColumn.setCellValueFactory(new PropertyValueFactory<>("idSport"));
         nomSportColumn.setCellValueFactory(new PropertyValueFactory<>("nomSport"));
@@ -166,34 +168,12 @@ public class DisplayJoueur {
         });
 
         loadJoueurs();
-
-        // Add search functionality
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filterJoueurs(newValue);
-        });
     }
 
     public void loadJoueurs() {
         joueurList.clear();
         joueurList.addAll(joueurService.recherche());
         tableView.setItems(joueurList);
-    }
-
-    private void filterJoueurs(String searchText) {
-        if (searchText == null || searchText.isEmpty()) {
-            tableView.setItems(joueurList);
-        } else {
-            ObservableList<Joueur> filteredList = FXCollections.observableArrayList();
-            String lowerCaseFilter = searchText.toLowerCase();
-            for (Joueur joueur : joueurList) {
-                if (joueur.getNom().toLowerCase().contains(lowerCaseFilter) ||
-                        joueur.getPrenom().toLowerCase().contains(lowerCaseFilter) ||
-                        joueur.getEmail().toLowerCase().contains(lowerCaseFilter)) {
-                    filteredList.add(joueur);
-                }
-            }
-            tableView.setItems(filteredList);
-        }
     }
 
     private void showAlert(String title, String header, String content) {

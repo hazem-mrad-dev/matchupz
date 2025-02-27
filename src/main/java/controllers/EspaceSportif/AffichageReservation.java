@@ -150,8 +150,7 @@ public class AffichageReservation {
     private void searchReservation(String keyword) {
         List<Reservation> searchResults = reservationService.rechercher().stream()
                 .filter(res -> res.getMotif().toLowerCase().contains(keyword.toLowerCase()) ||
-                        res.getStatus().toLowerCase().contains(keyword.toLowerCase()))
-                .toList();
+                        res.getStatus().toLowerCase().contains(keyword.toLowerCase())).toList();
 
         ObservableList<Reservation> data = FXCollections.observableArrayList(searchResults);
         tableView.setItems(data);

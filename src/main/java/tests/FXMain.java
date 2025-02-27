@@ -5,41 +5,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
+import utils.MyDataSource;
 
 public class FXMain extends Application {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        MyDataSource dataSource = MyDataSource.getInstance();
+        if (dataSource.getConn() != null) {
+            System.out.println("Connection test successful.");
+        } else {
+            System.err.println("Connection test failed!");
+        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/joueur/DisplayJoueur.fxml"));
+        Parent root = loader.load();
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+    }
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        String fxmlPath = "/joueur/DisplayJoueur.fxml"; // Ensure this path is correct
-        URL fxmlUrl = getClass().getResource(fxmlPath);
-
-        if (fxmlUrl == null) {
-            System.err.println("ERROR: FXML file not found at " + fxmlPath);
-            return; // Stop execution if file is missing
-        }
-
-        FXMLLoader loader = new FXMLLoader(fxmlUrl);
-        try {
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Ajouter");
-            primaryStage.setResizable(true);
-            primaryStage.show();
-        } catch (IOException e) {
-            System.err.println("ERROR: Failed to load FXML file.");
-            e.printStackTrace(); // Print full error details
-        } catch (RuntimeException e) {
-            System.err.println("ERROR: Unexpected issue in JavaFX application.");
-            e.printStackTrace();
-        }
     }
 }

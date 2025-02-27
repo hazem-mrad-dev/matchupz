@@ -19,7 +19,7 @@ public class JoueurService implements IService<Joueur> {
             ps.setString(2, joueur.getNomSport());
             ps.setString(3, joueur.getNom());
             ps.setString(4, joueur.getPrenom());
-            ps.setDate(5, new java.sql.Date(joueur.getDateNaissance().getTime())); // Convert java.util.Date to java.sql.Date
+            ps.setDate(5, new java.sql.Date(joueur.getDateNaissance().getTime()));
             ps.setString(6, joueur.getPoste());
             ps.setFloat(7, joueur.getTaille());
             ps.setFloat(8, joueur.getPoids());
@@ -46,7 +46,7 @@ public class JoueurService implements IService<Joueur> {
             ps.setString(2, joueur.getNomSport());
             ps.setString(3, joueur.getNom());
             ps.setString(4, joueur.getPrenom());
-            ps.setDate(5, new java.sql.Date(joueur.getDateNaissance().getTime())); // Convert java.util.Date to java.sql.Date
+            ps.setDate(5, new java.sql.Date(joueur.getDateNaissance().getTime()));
             ps.setString(6, joueur.getPoste());
             ps.setFloat(7, joueur.getTaille());
             ps.setFloat(8, joueur.getPoids());
@@ -72,31 +72,31 @@ public class JoueurService implements IService<Joueur> {
         }
     }
 
-    @Override
     public List<Joueur> recherche() {
         List<Joueur> joueurs = new ArrayList<>();
-        String req = "SELECT * FROM joueur";
-        try (PreparedStatement ps = connection.prepareStatement(req); ResultSet rs = ps.executeQuery()) {
+        String query = "SELECT * FROM joueur";
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                Joueur joueur = new Joueur(
-                        rs.getInt("id_sport"),
-                        rs.getString("nomSport"),
-                        rs.getString("nom"),
-                        rs.getString("prenom"),
-                        rs.getDate("date_naissance"), // Returns java.sql.Date, compatible with java.util.Date
-                        rs.getString("poste"),
-                        rs.getFloat("taille"),
-                        rs.getFloat("poids"),
-                        rs.getString("statut"),
-                        rs.getString("email"),
-                        rs.getString("telephone"),
-                        rs.getString("profile_picture_url")
-                );
+                Joueur joueur = new Joueur();
                 joueur.setIdJoueur(rs.getInt("id_joueur"));
+                joueur.setIdSport(rs.getInt("id_sport"));
+                joueur.setNomSport(rs.getString("nomSport")); // Fixed to match table
+                joueur.setNom(rs.getString("nom"));
+                joueur.setPrenom(rs.getString("prenom"));
+                joueur.setDateNaissance(rs.getDate("date_naissance"));
+                joueur.setPoste(rs.getString("poste"));
+                joueur.setTaille(rs.getFloat("taille"));
+                joueur.setPoids(rs.getFloat("poids"));
+                joueur.setStatut(rs.getString("statut"));
+                joueur.setEmail(rs.getString("email"));
+                joueur.setTelephone(rs.getString("telephone"));
+                joueur.setProfilePictureUrl(rs.getString("profile_picture_url")); // Fixed to match table
                 joueurs.add(joueur);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException("Failed to retrieve joueurs: " + e.getMessage());
         }
         return joueurs;
     }

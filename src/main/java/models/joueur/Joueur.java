@@ -39,6 +39,10 @@ public class Joueur {
         this.profilePictureUrl.set(profilePictureUrl);
     }
 
+    public Joueur() {
+
+    }
+
     // Getters and Setters
     public int getIdJoueur() { return idJoueur.get(); }
     public void setIdJoueur(int idJoueur) { this.idJoueur.set(idJoueur); }
