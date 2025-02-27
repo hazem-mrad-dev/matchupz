@@ -4,106 +4,105 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f3fa380-6add-42d0-bfe8-36d14e26fafa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/SingUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/SingUpController.java" afterDir="false" />
+    <list default="true" id="d294e218-8c1d-4200-807f-7bac0a927ed2" name="Changes" comment="lalou+lahzim+feriel+ismail">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/client_secret_245190884322-2d45bt1blf7it4drus0ekaoh7ckhiv31.apps.googleusercontent.com.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/client_secret_340679100619-i2ggmfo8rjjbm18pcngq9ubntnjg5hvu.apps.googleusercontent.com.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Enum" />
-        <option value="JavaFXApplication" />
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/src" value="joueur" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
+  &quot;associatedIndex&quot;: 2
 }</component>
-  <component name="ProjectId" id="2sw8IBW3ZUVzieN86m5QoCNeUVR" />
+  <component name="ProjectId" id="2tdzhE587nx2fWgzxd9nae9iecC" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.FXMain.executor": "Run",
-    "Application.MainUser.executor": "Run",
+    "Application.JavaFX.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "user",
+    "git-widget-placeholder": "dev0",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/MSI/Downloads/workshop_3a29",
+    "last_opened_file_path": "C:/Users/Hazem Mrad/Desktop/Integration",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.FXMain">
-    <configuration name="FXMain" type="Application" factoryName="Application">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Hazem Mrad\Desktop\Integration" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="JavaFX" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="jbr-17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="tests.FXMain" />
-      <module name="CRUD" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\MSI\Downloads\openjfx-20.0.2_windows-x64_bin-sdk\javafx-sdk-20.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <module name="Integration1" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\Hazem Mrad\Downloads\javafx-sdk-20.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.web,javafx.media" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainUser" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="tests.MainUser" />
-      <module name="CRUD" />
-      <option name="PROGRAM_PARAMETERS" value="--module-path &quot;C:\Users\MSI\Downloads\openjfx-20.0.2_windows-x64_bin-sdk\javafx-sdk-20.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.FXMain" />
-      <item itemvalue="Application.MainUser" />
-    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
+        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9f3fa380-6add-42d0-bfe8-36d14e26fafa" name="Changes" comment="" />
-      <created>1739355202961</created>
+      <changelist id="d294e218-8c1d-4200-807f-7bac0a927ed2" name="Changes" comment="" />
+      <created>1740696857001</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1739355202961</updated>
-      <workItem from="1739355203869" duration="20533000" />
-      <workItem from="1739462754721" duration="9358000" />
-      <workItem from="1739520640741" duration="1829000" />
-      <workItem from="1739528447599" duration="153000" />
-      <workItem from="1739619633931" duration="3065000" />
-      <workItem from="1739624786124" duration="16657000" />
-      <workItem from="1739708538159" duration="31043000" />
-      <workItem from="1739817815030" duration="15099000" />
-      <workItem from="1739900589969" duration="16528000" />
-      <workItem from="1739964808259" duration="41456000" />
-      <workItem from="1740039439323" duration="2391000" />
+      <updated>1740696857001</updated>
+      <workItem from="1740696858125" duration="89000" />
+      <workItem from="1740698060095" duration="724000" />
     </task>
+    <task id="LOCAL-00001" summary="lalou+lahzim+feriel+ismail">
+      <option name="closed" value="true" />
+      <created>1740700015536</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1740700015536</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="CRUD + Api" />
+    <MESSAGE value="lalou+lahzim+feriel+ismail" />
+    <option name="LAST_COMMIT_MESSAGE" value="lalou+lahzim+feriel+ismail" />
   </component>
 </project>
