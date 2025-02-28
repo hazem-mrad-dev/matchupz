@@ -1,0 +1,404 @@
+package controllers.user;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import models.utilisateur.Role;
+import models.utilisateur.User;
+import services.user.UserService;
+import java.io.File;
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.regex.Pattern;
+
+public class AddUtilisateurController {
+
+    @FXML
+    private Button button_retour, button_ajout_user, button_annuler_user;
+
+    @FXML
+    private ComboBox<String> combo_role;
+
+    @FXML
+    private DatePicker date_date_naiss;
+
+    @FXML
+    private RadioButton rb_femme, rb_homme;
+
+    @FXML
+    private TextField tf_email, tf_image, tf_mot_de_passe, tf_nom, tf_prenom, tf_tel;
+
+    private ToggleGroup toggleGroup;
+
+    @FXML
+    private void initialize() {
+        toggleGroup = new ToggleGroup();
+        rb_homme.setToggleGroup(toggleGroup);
+        rb_femme.setToggleGroup(toggleGroup);
+
+        for (Role role : Role.values()) {
+            combo_role.getItems().add(role.getValue());
+        }
+
+        tf_image.setEditable(false);
+        tf_image.setOnMouseClicked(event -> choisirImage());
+    }
+    @FXML
+    void ajouter(ActionEvent event) {
+        try {
+            if (!validerChamps()) return;
+
+            UserService userService = new UserService();
+
+            // Vérifier si l'email existe déjà
+            if (userService.emailExiste(tf_email.getText())) {
+                showAlert(Alert.AlertType.ERROR, "Erreur", "Cet email est déjà utilisé, essayez-en un autre !");
+                return;
+            }
+
+            String genre = rb_homme.isSelected() ? "Homme" : "Femme";
+            LocalDate dateNaissance = date_date_naiss.getValue();
+            Role role = Role.fromString(combo_role.getValue());
+            int tel = Integer.parseInt(tf_tel.getText());
+
+            User user = new User(
+                    tf_nom.getText(),
+                    tf_prenom.getText(),
+                    tf_email.getText(),
+                    tf_mot_de_passe.getText(),
+                    tel,
+                    dateNaissance,
+                    genre,
+                    role,
+                    tf_image.getText()
+            );
+
+            userService.ajouter(user);
+            showAlert(Alert.AlertType.CONFIRMATION, "Succès", "Utilisateur inscrit avec succès !");
+            resetFields();
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur s'est produite : " + e.getMessage());
+        }
+    }
+
+    /*@FXML
+    void ajouter(ActionEvent event) {
+        try {
+            if (!validerChamps()) return;
+
+            String genre = rb_homme.isSelected() ? "Homme" : "Femme";
+            LocalDate dateNaissance = date_date_naiss.getValue();
+            Role role = Role.fromString(combo_role.getValue());
+            int tel = Integer.parseInt(tf_tel.getText());
+
+            User user = new User(
+                    tf_nom.getText(),
+                    tf_prenom.getText(),
+                    tf_email.getText(),
+                    tf_mot_de_passe.getText(),
+                    tel,
+                    dateNaissance,
+                    genre,
+                    role,
+                    tf_image.getText()
+            );
+
+            new UserService().ajouter(user);
+            showAlert(Alert.AlertType.CONFIRMATION, "Succès", "Utilisateur inscrit avec succès !");
+            resetFields();
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur s'est produite : " + e.getMessage());
+        }
+    }
+*/
+
+
+    private boolean validerChamps() {
+        if (tf_nom.getText().isEmpty() || tf_prenom.getText().isEmpty() || tf_email.getText().isEmpty()
+                || tf_mot_de_passe.getText().isEmpty() || tf_tel.getText().isEmpty() || date_date_naiss.getValue() == null
+                || combo_role.getValue() == null || toggleGroup.getSelectedToggle() == null || tf_image.getText().isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Attention", "Veuillez remplir tous les champs !");
+            return false;
+        }
+
+        if (!Pattern.matches("[A-Z][a-zA-Z ]*", tf_nom.getText())) {
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Le nom doit commencer par une majuscule et ne contenir que des lettres et espaces !");
+            return false;
+        }
+
+        if (!Pattern.matches("[A-Z][a-zA-Z ]*", tf_prenom.getText())) {
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Le prénom doit commencer par une majuscule et ne contenir que des lettres et espaces !");
+            return false;
+        }
+
+        if (!Pattern.matches("^[a-zA-Z0-9._%+-]+@gmail\\.com$", tf_email.getText())) {
+            showAlert(Alert.AlertType.ERROR, "Erreur", "L'email doit être sous la forme exemple@gmail.com");
+            return false;
+        }
+
+        if (!Pattern.matches("\\d{8}", tf_tel.getText())) {
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Le numéro de téléphone doit contenir exactement 8 chiffres !");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void choisirImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir une image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        File file = fileChooser.showOpenDialog(new Stage());
+        if (file != null) {
+            tf_image.setText(file.toURI().toString());
+        }
+    }
+
+    private void resetFields() {
+        tf_nom.clear(); tf_prenom.clear(); tf_email.clear(); tf_mot_de_passe.clear();
+        tf_tel.clear(); tf_image.clear(); date_date_naiss.setValue(null);
+        combo_role.setValue(Role.UTILISATEUR.name());
+        toggleGroup.selectToggle(null);
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.show();
+    }
+
+    @FXML
+    void retour(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/user/tableView.fxml"));
+            Stage stage = (Stage) button_retour.getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Impossible de charger la page de retour.");
+        }
+    }
+
+    @FXML
+    void annuler(ActionEvent event) {
+        resetFields();
+    }
+}
+
+
+/*package controllers;
+
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import models.Role;
+import models.User;
+import services.UserService;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+
+public class AddUtilisateurController {
+
+    @FXML
+    private Button button_retour;
+
+    @FXML
+    private Button button_ajout_user;
+
+    @FXML
+    private Button button_annuler_user;
+
+    @FXML
+    private ComboBox<String> combo_role;
+
+    @FXML
+    private DatePicker date_date_naiss;
+
+    @FXML
+    private RadioButton rb_femme;
+
+    @FXML
+    private RadioButton rb_homme;
+
+    @FXML
+    private TextField tf_email;
+
+    @FXML
+    private TextField tf_image;
+
+    @FXML
+    private TextField tf_mot_de_passe;
+
+    @FXML
+    private TextField tf_nom;
+
+    @FXML
+    private TextField tf_prenom;
+
+    @FXML
+    private TextField tf_tel;
+
+    @FXML
+    void ajouter(ActionEvent event) {
+        try {
+            // Vérifier si tous les champs sont remplis
+            if (tf_nom.getText().isEmpty() || tf_prenom.getText().isEmpty() || tf_email.getText().isEmpty()
+                    || tf_mot_de_passe.getText().isEmpty() || tf_tel.getText().isEmpty() || date_date_naiss.getValue() == null
+                    || combo_role.getValue() == null || toggleGroup.getSelectedToggle() == null || tf_image.getText().isEmpty()) {
+                showAlert(Alert.AlertType.WARNING, "Attention", "Veuillez remplir tous les champs !");
+                return;
+            }
+
+            // Récupérer la valeur sélectionnée du genre
+            String genre = rb_homme.isSelected() ? "Homme" : "Femme";
+
+            // Récupérer la date de naissance
+            LocalDate dateNaissance = date_date_naiss.getValue();
+
+            // Récupérer le rôle sélectionné
+            String roleStr = combo_role.getValue();
+            Role role = Role.fromString(roleStr); // Convertir String en Enum
+
+            // Vérifier que le numéro de téléphone est un nombre valide
+            int tel;
+            try {
+                tel = Integer.parseInt(tf_tel.getText());
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Erreur", "Le numéro de téléphone doit être un nombre !");
+                return;
+            }
+
+            // Création de l'utilisateur
+            User user = new User(
+                    tf_nom.getText(),
+                    tf_prenom.getText(),
+                    tf_email.getText(),
+                    tf_mot_de_passe.getText(),
+                    tel,
+                    dateNaissance,
+                    genre,
+                    role,
+                    tf_image.getText()
+            );
+
+            // Ajouter l'utilisateur avec le service
+            UserService ps = new UserService();
+            ps.ajouter(user);
+
+            // Afficher un message de succès
+            showAlert(Alert.AlertType.CONFIRMATION, "Succès", "Utilisateur inscrit avec succès !");
+            resetFields();
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur s'est produite : " + e.getMessage());
+        }
+
+
+    }
+    private ToggleGroup toggleGroup;
+
+    @FXML
+    private void initialize() {
+        // Associer les boutons radio à un groupe
+        toggleGroup = new ToggleGroup();
+        rb_homme.setToggleGroup(toggleGroup);
+        rb_femme.setToggleGroup(toggleGroup);
+
+
+        for (Role role : Role.values()) {
+            combo_role.getItems().add(role.getValue()); // Utiliser getValue()
+        }
+
+        // Ajouter les rôles disponibles dans la ComboBox
+//        for (Role role : Role.values()) {
+//            combo_role.getItems().add(role.name()); // Convertir l'énumération en texte
+//        }
+//        combo_role.setValue(Role.UTILISATEUR.name()); // Rôle par défaut
+
+        // Rendre le champ image cliquable pour ouvrir l'explorateur de fichiers
+        tf_image.setEditable(false); // Empêche l'écriture manuelle
+        tf_image.setOnMouseClicked(event -> choisirImage());
+    }
+
+    private void choisirImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir une image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        // Ouvrir la fenêtre de sélection de fichier
+        File file = fileChooser.showOpenDialog(new Stage());
+
+        if (file != null) {
+            tf_image.setText(file.toURI().toString()); // Stocker l'URL de l'image
+        }
+    }
+
+    // ✅ Méthode pour vider tous les champs
+    private void resetFields() {
+        tf_nom.clear();
+        tf_prenom.clear();
+        tf_email.clear();
+        tf_mot_de_passe.clear();
+        tf_tel.clear();
+        tf_image.clear();
+        date_date_naiss.setValue(null);
+        combo_role.setValue(Role.UTILISATEUR.name()); // Remettre le rôle par défaut
+        toggleGroup.selectToggle(null); // Désélectionner les boutons radio
+    }
+    // Méthode utilitaire pour afficher des alertes
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.show();
+    }
+    @FXML
+    void retour(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tableView.fxml"));
+            Stage stage = (Stage) button_retour.getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Impossible de charger la page d'inscription.");
+        }
+
+    }
+    @FXML
+    void annuler(ActionEvent event) {
+        tf_nom.clear();
+        tf_prenom.clear();
+        tf_email.clear();
+        tf_mot_de_passe.clear();
+        tf_tel.clear();
+        tf_image.clear();
+        date_date_naiss.setValue(null);
+        combo_role.setValue(Role.UTILISATEUR.name()); // Remettre le rôle par défaut
+        toggleGroup.selectToggle(null); // Désélectionner les boutons radio
+
+    }
+
+}
+*/

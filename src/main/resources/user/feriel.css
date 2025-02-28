@@ -1,0 +1,52 @@
+/* Style général du TableView avec une ombre */
+.table-view {
+    -fx-background-color: linear-gradient(to bottom right, #2C3E50, #4CA1AF);
+    -fx-border-color: transparent; /* Supprime la bordure du tableau */
+    -fx-border-width: 0;
+    -fx-padding: 5px;
+    -fx-background-radius: 10px; /* Coins arrondis */
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 5, 5); /* Ombre */
+}
+
+/* Style de l'en-tête */
+.table-view .column-header-background {
+    -fx-background-color: #154360;
+    -fx-background-radius: 10px 10px 0 0; /* Coins arrondis en haut */
+}
+
+/* Style du texte de l'en-tête */
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Supprimer totalement la séparation entre les colonnes */
+.table-view .table-column {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+/* Style des cellules */
+.table-row-cell {
+    -fx-background-color: #ECF0F1;
+    -fx-border-color: transparent; /* Supprime les lignes entre les colonnes */
+    -fx-border-width: 0 0 1px 0; /* Garde une légère séparation entre les lignes */
+    -fx-padding: 5px;
+    -fx-background-radius: 10px; /* Coins arrondis */
+}
+
+/* Alternance des couleurs des lignes */
+.table-row-cell:odd {
+    -fx-background-color: #D5DBDB;
+}
+
+/* Changer la couleur quand une ligne est sélectionnée */
+.table-row-cell:selected {
+    -fx-background-color: #EAB700; /* Jaune */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px; /* Coins arrondis */
+}

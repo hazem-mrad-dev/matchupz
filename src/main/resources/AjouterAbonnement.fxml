@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1050.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EspaceSportif.AjouterAbonnement">
+   <children>
+      <!-- Sidebar Navigation -->
+      <AnchorPane prefHeight="613.0" prefWidth="206.0" styleClass="nav-form" stylesheets="@dashboardDesign1.css">
+         <children>
+            <Line endX="69.0" layoutX="121.0" layoutY="178.0" startX="-100.0" stroke="WHITE" />
+            <Button fx:id="logout" layoutX="36.0" layoutY="505.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="41.0" stylesheets="@dashboardDesign1.css">
+               <styleClass>
+                  <String fx:value="logout" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </Button>
+            <Label layoutX="83.0" layoutY="510.0" prefHeight="30.0" prefWidth="88.0" text="LOGOUT" textFill="WHITE">
+               <font>
+                  <Font name="Montserrat ExtraBold" size="20.0" />
+               </font>
+            </Label>
+            <Accordion layoutX="-1.0" layoutY="189.0" prefHeight="250.0" prefWidth="200.0">
+               <panes>
+                  <TitledPane text="Home" textFill="WHITE">
+                     <content>
+                        <VBox alignment="CENTER" spacing="0">
+                           <children>
+                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Overview" />
+                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="60.0" prefWidth="140.0" styleClass="accordion-button" text="Statistics" />
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+                  <TitledPane text="Responsable Financier" textFill="WHITE">
+                     <content>
+                        <VBox alignment="CENTER" spacing="0">
+                           <children>
+                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Budget" />
+                              <Button fx:id="btnSponsoring" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Contract Sponsors" />
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+                  <TitledPane text="Responsable Logistique" textFill="WHITE">
+                     <content>
+                        <VBox alignment="CENTER" spacing="0">
+                           <children>
+                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="accordion-button" text="Logistiques" />
+                              <Button fx:id="btnEspaceSportif" alignment="CENTER" mnemonicParsing="false" onAction="#goToAfficherAbonnements" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Espace Sportif" />
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+                  <TitledPane text="Responsable Sportive" textFill="WHITE">
+                     <content>
+                        <VBox alignment="CENTER" spacing="0">
+                           <children>
+                              <Button fx:id="btnMatchs" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Matches" />
+                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" styleClass="accordion-button" text="Teams" />
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
+               </panes>
+            </Accordion>
+            <AnchorPane layoutX="6.0" layoutY="14.0" prefHeight="155.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="41.0" fitWidth="184.0" layoutX="8.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/logo_horizantal.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutY="69.0" prefHeight="38.0" prefWidth="200.0" text="Welcome," textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Comic Sans MS" size="29.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutY="101.0" prefHeight="38.0" prefWidth="200.0" text="User" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="35.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="30.0" fitWidth="72.0" layoutX="41.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logout_w.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+      <!-- Main Content -->
+      <AnchorPane layoutX="213.0" layoutY="12.0" prefHeight="593.0" prefWidth="828.0" stylesheets="@dashboardDesign1.css">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <VBox alignment="CENTER" layoutX="25.0" layoutY="18.0" prefHeight="545.0" prefWidth="741.0" spacing="15" style="-fx-padding: 20px;">
+               <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Ajouter un Abonnement" />
+
+               <GridPane alignment="CENTER" hgap="15" vgap="15">
+                  <columnConstraints>
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="450.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+
+                  <Label text="Club :" GridPane.columnIndex="0" GridPane.rowIndex="0" />  <!-- Changé de Sport à Club -->
+                  <ComboBox fx:id="clubField" prefHeight="42.0" prefWidth="517.0" promptText="Choisir un club" GridPane.columnIndex="1" GridPane.rowIndex="0" />  <!-- Changé sportField à clubField et texte -->
+
+                  <Label text="Type d'abonnement :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="typeField" prefHeight="42.0" prefWidth="517.0" promptText="Sélectionner le type" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                  <Label text="Date de début :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                  <DatePicker fx:id="dateDebutField" prefHeight="32.0" prefWidth="519.0" promptText="Choisir la date de début" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                  <Label text="Date de fin :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                  <DatePicker fx:id="dateFinField" prefHeight="32.0" prefWidth="517.0" promptText="Choisir la date de fin" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                  <Label text="Tarif :" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                  <TextField fx:id="tarifField" prefHeight="32.0" prefWidth="441.0" promptText="Entrer le tarif" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                  <Label text="Statut :" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="etatField" prefHeight="42.0" prefWidth="519.0" promptText="Sélectionner le statut" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+               </GridPane>
+
+               <HBox alignment="CENTER" spacing="10">
+                  <Button fx:id="submitButton" onAction="#ajouterAbonnement" styleClass="form-button" text="Ajouter" />
+                  <Button fx:id="cancelButton" onAction="#annuler" styleClass="form-button" text="Annuler" />
+                  <Button fx:id="retourButton" onAction="#goToAfficherAbonnements" styleClass="form-button" text="Retour" />
+               </HBox>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

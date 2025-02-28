@@ -1,0 +1,640 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 09 21, 22, 4:12:17 PM
+    Author     : WINDOWS 10
+    Subscribe our Channel --> https://www.youtube.com/channel/UCPgcmw0LXToDn49akUEJBkQ
+ * Thanks for the support guys! <3
+*/
+
+.top-form {
+    -fx-background-color: #fff;
+    -fx-border-color: #000;
+    -fx-border-width: .4px .4px .2px .4px;
+}
+
+.semi-top-form {
+    -fx-background-color: #efefef;
+    -fx-border-color: #000;
+    -fx-border-width: .2px .4px .8px .4px;
+}
+
+.close {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+.close:hover {
+    -fx-background-color: #ff3547;
+}
+
+.minimize {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+.minimize:hover {
+    -fx-background-color: #ddd;
+}
+
+.nav-form {
+    -fx-background-color: linear-gradient(to bottom right, #272b3f, #256b51);
+}
+
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff;
+    -fx-alignment: CENTER-LEFT;
+}
+
+.logout {
+    -fx-background-color: #219a6a;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+.logout:hover {
+    -fx-background-color: #18a383;
+}
+
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 6, 0, 0, 0);
+}
+
+.grey-bg {
+    -fx-background-color: #efefef;
+    -fx-background-radius: 8px;
+}
+
+.card {
+    -fx-background-color: linear-gradient(to right, #2b303c, #525968);
+    -fx-background-radius: 5px;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-padding: 0px;
+}
+.table-view .table-column {
+    -fx-alignment: CENTER;
+}
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius: 8px 8px 0px 0px;
+}
+.table-view .column-header, .filter {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #fff;
+    -fx-font-family: "Arial";
+}
+
+/* Base Scrollbar */
+.scroll-bar {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+    -fx-pref-height: 8px;
+}
+
+/* Scroll Thumb */
+.scroll-bar .thumb {
+    -fx-background-color: #219a6a;
+    -fx-background-radius: 5px;
+}
+
+/* Scroll Thumb Hover */
+.scroll-bar .thumb:hover {
+    -fx-background-color: #18a383;
+}
+
+/* Scroll Track */
+.scroll-bar .track {
+    -fx-background-color: #333;
+    -fx-background-radius: 5px;
+}
+
+/* Horizontal Scrollbar */
+.scroll-bar:horizontal {
+    -fx-min-height: 8px;
+    -fx-max-height: 8px;
+}
+
+/* Vertical Scrollbar */
+.scroll-bar:vertical {
+    -fx-min-width: 8px;
+    -fx-max-width: 8px;
+}
+
+/* Remove scrollbar buttons */
+.table-view .scroll-bar .decrement-button,
+.table-view .scroll-bar .increment-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
+
+.table-view .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #18a383;
+}
+
+.textfield {
+    -fx-background-color: linear-gradient(to bottom, #efefef, #eee);
+    -fx-border-color: linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-width: .8px;
+    -fx-font-family: "Tahoma";
+    -fx-border-radius: 4px;
+}
+.textfield:focused {
+    -fx-border-width: 1.8px;
+    -fx-background-color: #fff;
+}
+
+.search {
+    -fx-background-color: transparent;
+    -fx-border-color: linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-radius: 5px;
+    -fx-font-size: 13px;
+    -fx-font-family: "Arial";
+    -fx-border-width: 1px;
+    -fx-padding: 0px 0px 0px 28px;
+}
+.search:focused {
+    -fx-border-width: 2px;
+}
+
+.import-btn {
+    -fx-background-color: #ddd;
+    -fx-text-fill: red;
+    -fx-cursor: hand;
+}
+
+.add-btn {
+    -fx-background-color: #304575;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-cursor: hand;
+}
+.add-btn:hover {
+    -fx-background-color: #3357a4;
+}
+
+.update-btn {
+    -fx-background-color: #327252;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-cursor: hand;
+}
+.update-btn:hover {
+    -fx-background-color: #309a65;
+}
+
+.delete-btn {
+    -fx-background-color: #86253f;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-cursor: hand;
+}
+.delete-btn:hover {
+    -fx-background-color: #ae1d46;
+}
+
+.clear-btn {
+    -fx-background-color: #753566;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-cursor: hand;
+}
+.clear-btn:hover {
+    -fx-background-color: #9d3485;
+}
+
+.label-info {
+    -fx-background-color: transparent;
+    -fx-border-color: linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-border-radius: 4px;
+    -fx-padding: 0px 0px 0px 8px;
+}
+
+.accordion {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 8px;
+}
+
+.accordion .title {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-transition: -fx-background-color 0.2s ease-in-out, -fx-text-fill 0.2s ease-in-out;
+}
+
+.accordion .title:hover {
+    -fx-background-color: rgba(24, 163, 131, 0.2);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: transparent;
+}
+
+.accordion .title:pressed {
+    -fx-background-color: rgba(24, 163, 131, 0.4);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: transparent;
+}
+
+.accordion .content {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10px;
+    -fx-border-color: transparent;
+}
+
+.accordion-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #fff;
+    -fx-padding: 10px;
+    -fx-border-color: transparent;
+}
+
+.accordion-button:hover {
+    -fx-background-color: #18a383;
+    -fx-border-color: transparent;
+}
+
+.accordion-button:pressed {
+    -fx-background-color: #18a383;
+    -fx-border-color: transparent;
+}
+
+#btn-secondary {
+    -fx-border-radius: 5px;
+    -fx-font-family: 'Montserrat SemiBold';
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-background-color: #E74C3C;
+    -fx-border-color: #C0392B;
+    -fx-background-radius: 0;
+    -fx-padding: 5px 20px;
+}
+
+.btn-primary {
+    -fx-font-family: 'Montserrat SemiBold';
+    -fx-font-size: 15px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-text-fill: white;
+    -fx-background-color: #27AE60;
+    -fx-border-color: #1E8449;
+    -fx-padding: 5px 20px;
+}
+
+#btn-secondary:hover {
+    -fx-background-color: #C0392B;
+    -fx-border-color: #A93226;
+}
+
+#btn-primary:hover {
+    -fx-background-color: #1E8449;
+    -fx-border-color: #196F3D;
+}
+
+#btn-secondary:focused, #btn-primary:focused {
+    -fx-border-color: #F1C40F;
+    -fx-border-width: 2px;
+}
+
+.white-bg {
+    -fx-background-color: #ffffff;
+}
+
+.shadow {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 4);
+    -fx-padding: 10;
+}
+
+.form-title {
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 36px;
+    -fx-fill: #333333;
+}
+
+.label-text {
+    -fx-font-family: "Montserrat Medium";
+    -fx-font-size: 15px;
+    -fx-fill: #555555;
+}
+
+.text-input {
+    -fx-font-family: "Montserrat Regular";
+    -fx-font-size: 14px;
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 5 10;
+}
+
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+    -fx-font-family: 'Montserrat Medium';
+    -fx-font-size: 14px;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #1E8449;
+    -fx-border-radius: 0 5px 5px 0;
+}
+
+.combo-box:hover {
+    -fx-border-color: #1E8449;
+}
+
+.spinner {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+    -fx-font-family: 'Montserrat Medium';
+    -fx-font-size: 14px;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: #1E8449;
+    -fx-text-fill: white;
+    -fx-border-radius: 3px;
+    -fx-padding: 3px;
+    -fx-cursor: hand;
+}
+
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-background-color: #196F3D;
+}
+
+.spinner .text-field {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-text-fill: #333;
+    -fx-font-family: 'Montserrat Medium';
+    -fx-font-size: 14px;
+    -fx-alignment: center;
+}
+
+.spinner:focused {
+    -fx-border-color: #196F3D;
+}
+
+.tab-pane {
+    -fx-background-color: #efefef;
+    -fx-padding: 10;
+}
+
+.tab {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #333333;
+    -fx-font-size: 15px;
+    -fx-padding: 10 20;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1px;
+    -fx-border-radius: 0;
+}
+
+.tab:hover {
+    -fx-background-color: #EFEFEF;
+    -fx-cursor: hand;
+}
+
+.tab:selected {
+    -fx-border-color: linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+}
+
+.tab .content {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 0;
+    -fx-padding: 10;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1px;
+}
+
+.tab .tab-header-area .tab .tab-selected {
+    -fx-background-color: transparent;
+}
+
+#btn-modify {
+    -fx-border-radius: 5px;
+    -fx-font-family: 'Montserrat Light';
+    -fx-font-size: 7px;
+    -fx-text-fill: white;
+    -fx-background-color: #F1C40F;
+    -fx-border-color: #F39C12;
+    -fx-background-radius: 0;
+    -fx-padding: 5px 20px;
+}
+
+#btn-delete {
+    -fx-border-radius: 5px;
+    -fx-font-family: 'Montserrat Light';
+    -fx-font-size: 7px;
+    -fx-text-fill: white;
+    -fx-background-color: #E74C3C;
+    -fx-border-color: #C0392B;
+    -fx-background-radius: 0;
+    -fx-padding: 5px 20px;
+}
+
+.search-field {
+    -fx-padding: 4.5px;
+    -fx-font-size: 14px;
+    -fx-border-color: #88d1aa;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-pref-width: 450px; /* Reduced from 500px to 250px */
+}
+.search-field:focused {
+    -fx-border-color: #4cae4c;
+    -fx-background-color: #f0fff0;
+}
+
+/* Updated Styles for Title and Minimized Buttons */
+VBox > Label {
+    -fx-font-family: "Montserrat ExtraBold";
+    -fx-font-size: 28px;
+    -fx-text-fill: linear-gradient(to bottom right, #272b3f, #256b51);
+    -fx-alignment: CENTER;
+    -fx-padding: 15px 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+    -fx-letter-spacing: 1px;
+}
+
+VBox > HBox {
+    -fx-alignment: CENTER;
+    -fx-spacing: 15; /* Reduced spacing to fit smaller buttons */
+    -fx-padding: 20px; /* Slightly reduced padding */
+}
+
+.form-button {
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 12px; /* Reduced from 16px for smaller buttons */
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 8px; /* Reduced from 12px for a tighter look */
+    -fx-border-radius: 8px;
+    -fx-padding: 6px 15px; /* Reduced from 10px 25px for smaller size */
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2); /* Lighter shadow */
+    -fx-transition: -fx-background-color 0.3s ease-in-out, -fx-scale-x 0.2s ease-in-out, -fx-scale-y 0.2s ease-in-out;
+}
+
+#submitButton {
+    -fx-background-color: #27AE60;
+    -fx-border-color: #1E8449;
+    -fx-border-width: 1px; /* Reduced from 1.5px */
+}
+
+#submitButton:hover {
+    -fx-background-color: #219653;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-border-color: #196F3D;
+}
+
+#submitButton:pressed {
+    -fx-background-color: #1E8449;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-border-color: #145A32;
+}
+
+#cancelButton {
+    -fx-background-color: #E74C3C;
+    -fx-border-color: #C0392B;
+    -fx-border-width: 1px; /* Reduced from 1.5px */
+}
+
+#cancelButton:hover {
+    -fx-background-color: #D43F2F;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-border-color: #A93226;
+}
+
+#cancelButton:pressed {
+    -fx-background-color: #C0392B;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-border-color: #922B21;
+}
+
+#retourButton {
+    -fx-background-color: #3498DB;
+    -fx-border-color: #2980B9;
+    -fx-border-width: 1px; /* Reduced from 1.5px */
+}
+
+#retourButton:hover {
+    -fx-background-color: #2E86C1;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-border-color: #2471A3;
+}
+
+#retourButton:pressed {
+    -fx-background-color: #2874A6;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-border-color: #1F618D;
+}
+
+#btnAjouter {
+    -fx-background-color: #27AE60; /* Green for "Ajouter" */
+    -fx-border-color: #1E8449;
+    -fx-border-width: 1px;
+}
+
+#btnAjouter:hover {
+    -fx-background-color: #219653;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-border-color: #196F3D;
+}
+
+#btnAjouter:pressed {
+    -fx-background-color: #1E8449;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-border-color: #145A32;
+}
+
+/* Specific Styling for Rafraîchir Button */
+#btnRefresh {
+    -fx-background-color: #3498DB; /* Blue for "Rafraîchir" */
+    -fx-border-color: #2980B9;
+    -fx-border-width: 1px;
+}
+
+#btnRefresh:hover {
+    -fx-background-color: #2E86C1;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-border-color: #2471A3;
+}
+
+#btnRefresh:pressed {
+    -fx-background-color: #2874A6;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-border-color: #1F618D;
+}
+
+/* Specific Styling for Export PDF Button */
+#btnExport {
+    -fx-background-color: #F39C12; /* Warm orange for "Export" to suggest documents */
+    -fx-border-color: #E67E22;
+    -fx-border-width: 1px;
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 12px;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 6px 15px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+#btnExport:hover {
+    -fx-background-color: #E67E22;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-border-color: #D35400;
+}
+
+#btnExport:pressed {
+    -fx-background-color: #D35400;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-border-color: #BA4A00;
+}

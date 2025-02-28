@@ -1,0 +1,77 @@
+/* Menu Button Styling */
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-padding: 10px;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #ccc;
+    -fx-alignment: center-left;
+    -fx-background-radius: 0;
+}
+.menu-button:hover {
+    -fx-background-color: #aec6cf;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-border-color: #89a6b2;
+}
+
+/* Action Button */
+.action-button {
+    -fx-background-color: #5cb85c;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+}
+.action-button:hover {
+    -fx-background-color: #4cae4c;
+}
+
+/* Cancel Button */
+.cancel-button {
+    -fx-background-color: #d9534f;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+}
+.cancel-button:hover {
+    -fx-background-color: #c9302c;
+}
+
+/* Tab Pane Styling */
+.tab-pane .tab-header-area {
+    -fx-background-color: #e8eef1;
+}
+.tab {
+    -fx-font-size: 14px;
+    -fx-padding: 8px;
+    -fx-background-color: transparent;
+}
+.tab:selected {
+    -fx-background-color: #5cb85c;
+    -fx-text-fill: white;
+}
+
+/* Search Field Styling */
+.search-field {
+    -fx-padding: 6px;
+    -fx-font-size: 14px;
+    -fx-border-color: #88d1aa;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-pref-width: 300px;
+}
+.search-field:focused {
+    -fx-border-color: #4cae4c;
+    -fx-background-color: #f0fff0;
+}

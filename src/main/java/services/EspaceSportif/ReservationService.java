@@ -1,0 +1,96 @@
+package services.EspaceSportif;
+
+import models.EspaceSportif.EspaceSportif;
+import models.EspaceSportif.Reservation;
+import utils.MyDataSource;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ReservationService implements EspaceService<Reservation> {
+    Connection connection = MyDataSource.getInstance().getConn();
+
+    @Override
+    public void ajouter(Reservation reservation) {
+        String req = "INSERT INTO `reservation` (`id_lieu`, `date_reservee`, `motif`, `status`) VALUES (?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(req);
+            ps.setInt(1, reservation.getIdLieu());
+            ps.setTimestamp(2, reservation.getDateReservee());
+            ps.setString(3, reservation.getMotif());
+            ps.setString(4, reservation.getStatus());
+            ps.executeUpdate();
+            System.out.println("Réservation ajoutée !");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void modifier(Reservation reservation) {
+        String req = "UPDATE `reservation` SET `id_lieu`=?, `date_reservee`=?, `motif`=?, `status`=? WHERE `id_reservation`=?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(req);
+            ps.setInt(1, reservation.getIdLieu());
+            ps.setTimestamp(2, reservation.getDateReservee());
+            ps.setString(3, reservation.getMotif());
+            ps.setString(4, reservation.getStatus());
+            ps.setInt(5, reservation.getIdReservation());
+            ps.executeUpdate();
+            System.out.println("Réservation modifiée !");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void supprimer(Reservation reservation) {
+        String req = "DELETE FROM `reservation` WHERE `id_reservation`=?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(req);
+            ps.setInt(1, reservation.getIdReservation());
+            ps.executeUpdate();
+            System.out.println("Réservation supprimée !");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public List<Reservation> rechercher() {
+        List<Reservation> reservations = new ArrayList<>();
+        String query = "SELECT r.id_reservation, r.date_reservee, r.motif, r.status, " +
+                "l.id_lieu, l.nom_espace " +  // Récupère id et nom du lieu
+                "FROM reservation r " +
+                "JOIN espacesportif l ON r.id_lieu = l.id_lieu";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Reservation res = new Reservation();
+                res.setIdReservation(rs.getInt("id_reservation"));
+                res.setDateReservee(rs.getTimestamp("date_reservee"));
+                res.setMotif(rs.getString("motif"));
+                res.setStatus(rs.getString("status"));
+
+                // Créer un objet EspaceSportif et l’associer
+                EspaceSportif espace = new EspaceSportif();
+                espace.setIdLieu(rs.getInt("id_lieu"));
+                espace.setNomEspace(rs.getString("nom_espace"));
+
+                res.setEspaceSportif(espace); // Associe l'espace à la réservation
+
+                reservations.add(res);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reservations;
+    }
+
+
+}
