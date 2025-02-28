@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1114.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.joueur.DisplayHistorique">
+    <children>
+        <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0" stylesheets="@../dashboardDesign.css">
+            <children>
+                <BorderPane layoutX="79.0" layoutY="100.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <left>
+                        <AnchorPane prefHeight="555.0" prefWidth="211.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane prefHeight="555.0" prefWidth="207.0" styleClass="nav-form" stylesheets="@../dashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <Line endX="69.0" layoutX="121.0" layoutY="178.0" startX="-100.0" stroke="WHITE" />
+                                        <Button fx:id="logout" layoutX="21.0" layoutY="504.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="32.0" stylesheets="@../dashboardDesign.css">
+                                            <styleClass>
+                                                <String fx:value="logout" />
+                                                <String fx:value="shadow" />
+                                            </styleClass>
+                                            <graphic>
+                                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../images/logout_w.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                        <Label layoutX="91.0" layoutY="515.0" prefHeight="29.0" prefWidth="100.0" text="LOGOUT" textFill="WHITE">
+                                            <font>
+                                                <Font name="Montserrat ExtraBold" size="15.0" />
+                                            </font>
+                                        </Label>
+                                        <Accordion layoutX="-1.0" layoutY="189.0" prefHeight="250.0" prefWidth="200.0" />
+                                        <AnchorPane layoutX="6.0" layoutY="14.0" prefHeight="155.0" prefWidth="200.0">
+                                            <children>
+                                                <ImageView fitHeight="41.0" fitWidth="184.0" layoutX="8.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../images/logo_horizantal.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" layoutY="69.0" prefHeight="38.0" prefWidth="200.0" text="Welcome," textAlignment="CENTER" textFill="WHITE">
+                                                    <font>
+                                                        <Font name="Comic Sans MS" size="29.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutY="101.0" prefHeight="38.0" prefWidth="200.0" text="User" textAlignment="CENTER" textFill="WHITE">
+                                                    <font>
+                                                        <Font name="Comic Sans MS Bold" size="35.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </AnchorPane>
+                              <Button fx:id="dashboard" alignment="CENTER" layoutX="-2.0" layoutY="177.0" mnemonicParsing="false" onAction="#dashboard" prefHeight="40.0" prefWidth="198.0" styleClass="accordion-button" text="Home">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="logistique" alignment="CENTER" layoutX="1.0" layoutY="220.0" mnemonicParsing="false" onAction="#logistique" prefHeight="40.0" prefWidth="195.0" styleClass="accordion-button" text="Logistique">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="espace" alignment="CENTER" layoutX="1.0" layoutY="266.0" mnemonicParsing="false" onAction="#espace" prefHeight="40.0" prefWidth="199.0" styleClass="accordion-button" text="Espace sportif">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="19.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/home.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="18.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/logistics.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="15.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/espaces.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="teams" alignment="CENTER" layoutX="-1.0" layoutY="307.0" mnemonicParsing="false" onAction="#teams" prefHeight="40.0" prefWidth="201.0" styleClass="accordion-button" text="Teams">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="sponsor" alignment="CENTER" layoutX="3.0" layoutY="346.0" mnemonicParsing="false" onAction="#sponsor" prefHeight="40.0" prefWidth="200.0" styleClass="accordion-button" text="Sponsor">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="match" alignment="CENTER" layoutY="389.0" mnemonicParsing="false" onAction="#match" prefHeight="40.0" prefWidth="198.0" styleClass="accordion-button" text="Match">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="bt_user" alignment="CENTER" layoutY="431.0" mnemonicParsing="false" onAction="#pageuser" prefHeight="40.0" prefWidth="202.0" styleClass="accordion-button" text="Utilisateur ">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="18.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/team.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="37.0" fitWidth="30.0" layoutX="17.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/sponsor.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="16.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/vs.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="16.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/user.png" />
+                                 </image>
+                              </ImageView>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </left>
+                    <center>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <!-- Search Bar with Button -->
+                                <HBox alignment="CENTER_LEFT" layoutX="16.0" layoutY="20.0" prefHeight="40.0" prefWidth="870.0" spacing="10.0">
+                                    <children>
+                                        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" prefHeight="35.0" prefWidth="188.0" styleClass="btn-primary" text="Rechercher 🔎" />
+                                        <TextField fx:id="searchField" prefHeight="34.0" prefWidth="672.0" promptText="Search by Player ID, Club Name, or Season">
+                                            <styleClass>
+                                                <String fx:value="search-field" />
+                                            </styleClass>
+                                        </TextField>
+                                    </children>
+                                </HBox>
+                                <!-- TableView for Entity -->
+                                <TableView fx:id="tableView" layoutX="16.0" layoutY="71.0" prefHeight="336.0" prefWidth="870.0">
+                                    <columns>
+                                        <TableColumn fx:id="idHistoriqueColumn" prefWidth="86.39998245239258" text="ID Historique" />
+                                        <TableColumn fx:id="idJoueurColumn" prefWidth="88.00003051757812" text="ID Joueur" />
+                                        <TableColumn fx:id="nomClubColumn" prefWidth="135.9999237060547" text="Nom Club" />
+                                        <TableColumn fx:id="saisonDebutColumn" prefWidth="163.99993896484375" text="Saison Debut" />
+                                        <TableColumn fx:id="saisonFinColumn" prefWidth="135.199951171875" text="Saison Fin" />
+                                        <TableColumn fx:id="modifierColumn" prefWidth="170.0" text="Modifier" />
+                                        <TableColumn fx:id="deleteColumn" prefWidth="170.0" text="Delete" />
+                                    </columns>
+                                </TableView>
+                                <!-- Action buttons for operations (Add, Analytics, Statistics) -->
+                                <AnchorPane layoutX="0.0" layoutY="417.0" prefHeight="178.0" prefWidth="902.0">
+                                    <children>
+                                        <!-- Add Historique Button -->
+                                        <AnchorPane layoutX="14.0" layoutY="23.0" prefHeight="131.0" prefWidth="250.0" stylesheets="@../dashboardDesign.css">
+                                            <children>
+                                                <Button fx:id="addHistoriqueButton" layoutX="40.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleAddHistoriqueButton" prefHeight="35.0" prefWidth="170.0" styleClass="btn-primary" text="Add Historique" />
+                                            </children>
+                                            <styleClass>
+                                                <String fx:value="card" />
+                                                <String fx:value="shadow" />
+                                            </styleClass>
+                                        </AnchorPane>
+                                        <!-- Analytics Button -->
+                                        <AnchorPane layoutX="326.0" layoutY="23.0" prefHeight="131.0" prefWidth="250.0" stylesheets="@../dashboardDesign.css">
+                                            <children>
+                                                <Button fx:id="analyticsButton" layoutX="58.0" layoutY="48.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="134.0" styleClass="btn-primary" text="Analytics" />
+                                            </children>
+                                            <styleClass>
+                                                <String fx:value="card" />
+                                                <String fx:value="shadow" />
+                                            </styleClass>
+                                        </AnchorPane>
+                                        <!-- Statistics Button -->
+                                        <AnchorPane layoutX="637.0" layoutY="23.0" prefHeight="131.0" prefWidth="250.0" stylesheets="@../dashboardDesign.css">
+                                            <children>
+                                                <Button fx:id="statisticsButton" layoutX="58.0" layoutY="48.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="134.0" styleClass="btn-primary" text="Statistics" />
+                                            </children>
+                                            <styleClass>
+                                                <String fx:value="card" />
+                                                <String fx:value="shadow" />
+                                            </styleClass>
+                                        </AnchorPane>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </center>
+                </BorderPane>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>

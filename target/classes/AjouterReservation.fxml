@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1050.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EspaceSportif.AjouterReservation">
+   <AnchorPane layoutX="213.0" layoutY="12.0" prefHeight="593.0" prefWidth="826.0" stylesheets="@dashboardDesign1.css">
+      <styleClass>
+         <String fx:value="white-bg" />
+         <String fx:value="shadow" />
+      </styleClass>
+      <children>
+
+         <!-- Formulaire d'ajout de réservation -->
+         <VBox alignment="CENTER" layoutX="25.0" layoutY="18.0" prefHeight="545.0" prefWidth="741.0" spacing="15" style="-fx-padding: 20px;">
+            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Ajouter une Réservation" />
+
+            <GridPane alignment="CENTER" hgap="15" vgap="15">
+               <Label text="Lieu :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+               <ComboBox fx:id="lieuField" prefHeight="33.0" prefWidth="450" promptText="saisir espace" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+               <Label text="Date :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+               <DatePicker fx:id="dateField" prefWidth="450" promptText="Saisir date" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+               <Label text="Motif :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+               <ComboBox fx:id="motifField" prefWidth="450" promptText="saisir motif" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+               <Label text="Statut :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+               <ComboBox fx:id="statusField" prefWidth="450" promptText="saisir statut" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+            </GridPane>
+
+            <HBox spacing="10">
+               <Button fx:id="submitButton" onAction="#ajouterReservation" styleClass="form-button" text="Ajouter" />
+               <Button fx:id="cancelButton" onAction="#annuler" styleClass="form-button" text="Annuler" />
+               <Button fx:id="retourButton" onAction="#goToAfficherReservations" styleClass="form-button" text="Retour" />
+            </HBox>
+         </VBox>
+      </children>
+   </AnchorPane>
+
+   <HBox alignment="CENTER" spacing="10" />
+   <AnchorPane prefHeight="613.0" prefWidth="206.0" styleClass="nav-form" stylesheets="@dashboardDesign1.css">
+      <children>
+         <Line endX="69.0" layoutX="121.0" layoutY="178.0" startX="-100.0" stroke="WHITE" />
+         <Button fx:id="logout" layoutX="36.0" layoutY="505.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="41.0" stylesheets="@/dashboardDesign1.css">
+            <styleClass>
+               <String fx:value="logout" />
+               <String fx:value="shadow" />
+            </styleClass>
+         </Button>
+         <Label layoutX="83.0" layoutY="510.0" prefHeight="30.0" prefWidth="88.0" text="LOGOUT" textFill="WHITE">
+            <font>
+               <Font name="Montserrat ExtraBold" size="20.0" />
+            </font>
+         </Label>
+         <Accordion layoutX="-1.0" layoutY="189.0" prefHeight="250.0" prefWidth="200.0" />
+         <AnchorPane layoutX="6.0" layoutY="14.0" prefHeight="155.0" prefWidth="200.0">
+            <children>
+               <ImageView fitHeight="41.0" fitWidth="184.0" layoutX="8.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@images/logo_horizantal.png" />
+                  </image>
+               </ImageView>
+               <Label alignment="CENTER" layoutY="69.0" prefHeight="38.0" prefWidth="200.0" text="Welcome," textAlignment="CENTER" textFill="WHITE">
+                  <font>
+                     <Font name="Comic Sans MS" size="29.0" />
+                  </font>
+               </Label>
+               <Label alignment="CENTER" layoutY="101.0" prefHeight="38.0" prefWidth="200.0" text="User" textAlignment="CENTER" textFill="WHITE">
+                  <font>
+                     <Font name="Comic Sans MS Bold" size="35.0" />
+                  </font>
+               </Label>
+            </children>
+         </AnchorPane>
+         <ImageView fitHeight="30.0" fitWidth="72.0" layoutX="41.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@images/logout_w.png" />
+            </image>
+         </ImageView>
+         <Button fx:id="dashboard" alignment="CENTER" layoutX="-1.0" layoutY="172.0" mnemonicParsing="false" onAction="#dashboard" prefHeight="40.0" prefWidth="198.0" styleClass="accordion-button" text="Home">
+            <font>
+               <Font name="Montserrat Medium" size="12.0" />
+            </font>
+         </Button>
+         <Button fx:id="logistique" alignment="CENTER" layoutX="2.0" layoutY="215.0" mnemonicParsing="false" onAction="#logistique" prefHeight="40.0" prefWidth="195.0" styleClass="accordion-button" text="Logistique">
+            <font>
+               <Font name="Montserrat Medium" size="12.0" />
+            </font>
+         </Button>
+         <Button fx:id="espace" alignment="CENTER" layoutX="2.0" layoutY="261.0" mnemonicParsing="false" onAction="#espace" prefHeight="40.0" prefWidth="199.0" styleClass="accordion-button" text="Espace sportif">
+            <font>
+               <Font name="Montserrat Medium" size="12.0" />
+            </font>
+         </Button>
+         <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="20.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@icons/home.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="19.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@icons/logistics.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="16.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@icons/espaces.png" />
+            </image>
+         </ImageView>
+         <Button fx:id="teams" alignment="CENTER" layoutY="302.0" mnemonicParsing="false" onAction="#teams" prefHeight="40.0" prefWidth="201.0" styleClass="accordion-button" text="Teams">
+            <font>
+               <Font name="Montserrat Medium" size="12.0" />
+            </font>
+         </Button>
+         <Button fx:id="sponsor" alignment="CENTER" layoutX="4.0" layoutY="341.0" mnemonicParsing="false" onAction="#sponsor" prefHeight="40.0" prefWidth="200.0" styleClass="accordion-button" text="Sponsor">
+            <font>
+               <Font name="Montserrat Medium" size="12.0" />
+            </font>
+         </Button>
+         <Button fx:id="match" alignment="CENTER" layoutX="1.0" layoutY="384.0" mnemonicParsing="false" onAction="#match" prefHeight="40.0" prefWidth="198.0" styleClass="accordion-button" text="Match">
+            <font>
+               <Font name="Montserrat Medium" size="12.0" />
+            </font>
+         </Button>
+         <Button fx:id="bt_user" alignment="CENTER" layoutX="1.0" layoutY="426.0" mnemonicParsing="false" onAction="#pageuser" prefHeight="40.0" prefWidth="202.0" styleClass="accordion-button" text="Utilisateur ">
+            <font>
+               <Font name="Montserrat Medium" size="12.0" />
+            </font>
+         </Button>
+         <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="19.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@icons/team.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="37.0" fitWidth="30.0" layoutX="18.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@icons/sponsor.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="17.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@icons/vs.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="17.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@icons/user.png" />
+            </image>
+         </ImageView>
+      </children>
+   </AnchorPane>
+</AnchorPane>

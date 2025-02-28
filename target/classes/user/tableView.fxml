@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="626.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.user.TableViewController">
+   <children>
+      <TabPane fx:id="tabPane" layoutX="-13.0" prefHeight="582.0" prefWidth="944.0" tabClosingPolicy="UNAVAILABLE" />
+      <TableView fx:id="table_user_view" layoutX="26.0" layoutY="183.0" prefHeight="279.0" prefWidth="926.0">
+         <columns>
+            <TableColumn fx:id="idcol" prefWidth="84.0" style="-fx-background-color: 000000;" text="id_user" />
+            <TableColumn fx:id="nomcol" prefWidth="66.4000244140625" style="-fx-background-color: 000000;" text="nom" />
+            <TableColumn fx:id="prenomcol" prefWidth="75.0" style="-fx-background-color: 000000;" text="prenom" />
+            <TableColumn fx:id="emailcol" prefWidth="75.0" style="-fx-background-color: 000000;" text="email" />
+            <TableColumn fx:id="mdpcol" prefWidth="87.199951171875" style="-fx-background-color: 000000;" text="password" />
+            <TableColumn fx:id="telcol" prefWidth="78.39996337890625" style="-fx-background-color: 000000;" text="num_telephone" />
+            <TableColumn fx:id="datecol" prefWidth="101.60003662109375" style="-fx-background-color: 6A5ACD;" text="date_de_naissance" />
+            <TableColumn fx:id="genrecol" prefWidth="66.40008544921875" style="-fx-background-color: 000000;" text="genre" />
+            <TableColumn fx:id="rolecol" prefWidth="95.99993896484375" style="-fx-background-color: 000000;" text="role" />
+            <TableColumn fx:id="imagecol" prefWidth="68.79995117187502" style="-fx-background-color: 000000;" text="image" />
+            <TableColumn fx:id="modifcol" prefWidth="68.79995117187502" style="-fx-background-color: ADD8E6;" text="Modifier" />
+            <TableColumn fx:id="suppcol" prefWidth="68.79995117187502" style="-fx-background-color: FF0000;" text="Supprimer" />
+         </columns>
+      </TableView>
+      <Pane layoutX="21.0" layoutY="97.0" prefHeight="5.0" prefWidth="926.0" style="-fx-background-color: black;" />
+      <Text layoutX="31.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User details" wrappingWidth="206.496337890625">
+         <font>
+            <Font name="Bodoni MT" size="36.0" />
+         </font>
+      </Text>
+      <HBox alignment="CENTER" layoutX="297.0" layoutY="163.0" />
+      <Button fx:id="button_ajout" layoutX="853.0" layoutY="483.0" mnemonicParsing="false" onAction="#ajout" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: eab700;" text="Ajouter" />
+      <Button fx:id="bt_add" layoutX="21.0" layoutY="134.0" mnemonicParsing="false" onMouseClicked="#getAddView" prefHeight="17.0" prefWidth="82.0" style="-fx-background-color: eab700;" text="Ajouter un utilisateur " />
+      <Button fx:id="bt_refresh" layoutX="115.0" layoutY="134.0" mnemonicParsing="false" onMouseClicked="#refreshTable" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: eab700;" text="Actualiser " />
+   </children>
+</AnchorPane>

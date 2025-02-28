@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="496.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.user.SingUpController">
+   <children>
+      <AnchorPane prefHeight="496.0" prefWidth="224.0" style="-fx-background-color: bf176b;">
+         <children>
+            <ImageView fx:id="image" fitHeight="157.0" fitWidth="200.0" layoutX="31.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Desktop/image.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="138.0" layoutX="7.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Downloads/logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="14.0" layoutY="370.0" text="Welcome to" textAlignment="JUSTIFY" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="82.0" layoutY="399.0" text="MatchUPZ." textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="496.0" prefWidth="423.0">
+         <children>
+            <Label layoutX="57.0" layoutY="14.0" prefHeight="38.0" prefWidth="302.0" text="Créer un nouveau compte" textFill="#22577a">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="79.0" prefHeight="18.0" prefWidth="62.0" text="Nom ">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="113.0" prefHeight="18.0" prefWidth="62.0" text="Prenom">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="148.0" prefHeight="18.0" prefWidth="62.0" text="Email">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="29.0" layoutY="182.0" prefHeight="18.0" prefWidth="102.0" text="Mot de passe">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="216.0" prefHeight="18.0" prefWidth="82.0" text="Telephone">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="29.0" layoutY="248.0" prefHeight="18.0" prefWidth="132.0" text="Date de naissance ">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="29.0" layoutY="282.0" prefHeight="18.0" prefWidth="62.0" text="Genre">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="31.0" layoutY="318.0" prefHeight="18.0" prefWidth="62.0" text="Role">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="31.0" layoutY="350.0" prefHeight="18.0" prefWidth="62.0" text="Image">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tf_nom" layoutX="168.0" layoutY="75.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="tf_email" layoutX="168.0" layoutY="141.0" prefHeight="27.0" prefWidth="174.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="tf_tel" layoutX="169.0" layoutY="211.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="tf_image" layoutX="167.0" layoutY="350.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </TextField>
+            <DatePicker fx:id="date_date_naiss" layoutX="168.0" layoutY="244.0" prefHeight="26.0" prefWidth="174.0" />
+            <ComboBox fx:id="combo_role" layoutX="167.0" layoutY="316.0" prefHeight="26.0" prefWidth="174.0" />
+            <RadioButton fx:id="rb_femme" layoutX="167.0" layoutY="286.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="97.0" text="Femme" />
+            <RadioButton fx:id="rb_homme" layoutX="267.0" layoutY="286.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="82.0" text="Homme" />
+            <Button fx:id="button_sinscrire" layoutX="99.0" layoutY="392.0" mnemonicParsing="false" onAction="#sinscrire" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: eab700;" text="S'inscrire">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="69.0" layoutY="442.0" prefHeight="18.0" prefWidth="132.0" text="Deja membre ?">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="button_se_connecter" layoutX="201.0" layoutY="436.0" mnemonicParsing="false" onAction="#seconnecter" prefHeight="27.0" prefWidth="138.0" style="-fx-background-color: transparente; -fx-cursor: hand;" text="Se connecter" textFill="#eab700" underline="true">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Button>
+            <TextField fx:id="tf_prenom" layoutX="168.0" layoutY="108.0">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="tf_mot_de_passe" layoutX="169.0" layoutY="178.0" prefHeight="26.0" prefWidth="174.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>

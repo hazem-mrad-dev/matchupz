@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="602.0" prefWidth="922.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.sponsor.AfficherTransaction">
+
+    <HBox alignment="CENTER" spacing="10">
+        <!-- Sidebar -->
+        <VBox prefHeight="587.0" prefWidth="198.0" style="-fx-background-color: #d7e6eb; -fx-padding: 15px;">
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 10px;" text="MATCHUPZ" />
+
+            <Button styleClass="menu-button" text="🏠 Utilisateur" />
+            <Button styleClass="menu-button" text="⚽ Joueur" />
+            <Button styleClass="menu-button" text="🏆 Matchs" />
+            <Button styleClass="menu-button" text="📍 EspaceSportif" />
+            <Button styleClass="menu-button" text="💰 Transactions" />
+        </VBox>
+
+        <!-- Main Content -->
+        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 15px;">
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Liste des Transactions" />
+
+            <TableView fx:id="tableViewTransactions" prefHeight="487.0" prefWidth="726.0">
+                <columns>
+                    <TableColumn fx:id="colMontant" prefWidth="120.0" text="Montant" />
+                    <TableColumn fx:id="colDate" prefWidth="120.0" text="Date" />
+                    <TableColumn fx:id="colType" prefWidth="150.0" text="Type" />
+                    <TableColumn fx:id="colDescription" prefWidth="150.0" text="description" />
+                    <TableColumn fx:id="colActions" prefWidth="200.0" text="Actions" />
+                </columns>
+            </TableView>
+
+            <HBox alignment="CENTER" spacing="10">
+                <Button fx:id="btnAjouter" onAction="#handleAjouter" text="Ajouter" />
+                <Button fx:id="btnActualiser" onAction="#refreshList" styleClass="refresh-button" text="Actualiser" />
+            </HBox>
+        </VBox>
+    </HBox>
+
+</AnchorPane>

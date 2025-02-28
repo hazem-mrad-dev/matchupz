@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1114.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.fournisseur.DisplayMateriel">
+    <children>
+        <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
+            <children>
+                <BorderPane layoutX="79.0" layoutY="100.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <left>
+                        <AnchorPane prefHeight="555.0" prefWidth="211.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane prefHeight="555.0" prefWidth="207.0" styleClass="nav-form" stylesheets="@../dashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <Line endX="69.0" layoutX="121.0" layoutY="178.0" startX="-100.0" stroke="WHITE" />
+                                        <Button fx:id="log_out" layoutX="21.0" layoutY="504.0" mnemonicParsing="false" onAction="#log_out" prefHeight="46.0" prefWidth="32.0" stylesheets="@../dashboardDesign.css">
+                                            <styleClass>
+                                                <String fx:value="logout" />
+                                                <String fx:value="shadow" />
+                                            </styleClass>
+                                            <graphic>
+                                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../images/logout_w.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                        <Label layoutX="91.0" layoutY="515.0" prefHeight="29.0" prefWidth="100.0" text="LOGOUT" textFill="WHITE">
+                                            <font>
+                                                <Font name="Montserrat ExtraBold" size="15.0" />
+                                            </font>
+                                        </Label>
+                                        <Accordion layoutX="-1.0" layoutY="189.0" prefHeight="250.0" prefWidth="200.0" />
+                                        <AnchorPane layoutX="6.0" layoutY="14.0" prefHeight="155.0" prefWidth="200.0">
+                                            <children>
+                                                <ImageView fitHeight="41.0" fitWidth="184.0" layoutX="8.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../images/logo_horizantal.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" layoutY="69.0" prefHeight="38.0" prefWidth="200.0" text="Welcome," textAlignment="CENTER" textFill="WHITE">
+                                                    <font>
+                                                        <Font name="Comic Sans MS" size="29.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label alignment="CENTER" layoutY="101.0" prefHeight="38.0" prefWidth="200.0" text="User" textAlignment="CENTER" textFill="WHITE">
+                                                    <font>
+                                                        <Font name="Comic Sans MS Bold" size="35.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </AnchorPane>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </left>
+                    <center>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane fx:id="home_form" layoutX="63.0" layoutY="-13.6" prefHeight="600.0" prefWidth="916.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-27.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <AnchorPane layoutX="8.0" layoutY="4.0" prefHeight="578.0" prefWidth="882.0" stylesheets="@../dashboardDesign.css">
+                                            <styleClass>
+                                                <String fx:value="white-bg" />
+                                                <String fx:value="shadow" />
+                                            </styleClass>
+                                            <children>
+                                                <TabPane layoutX="13.0" layoutY="19.0" prefHeight="551.0" prefWidth="853.0" tabClosingPolicy="UNAVAILABLE">
+                                                    <tabs>
+                                                        <Tab text="Matériels">
+                                                            <content>
+                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="519.0" prefWidth="833.0">
+                                                                    <children>
+                                                                        <TableView fx:id="tableView" layoutX="1.0" layoutY="50.0" prefHeight="278.0" prefWidth="832.0">
+                                                                            <columns>
+                                                                                <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID" />
+                                                                                <TableColumn fx:id="nomColumn" prefWidth="120.0" text="Nom" />
+                                                                                <TableColumn fx:id="typeColumn" prefWidth="120.0" text="Type" />
+                                                                                <TableColumn fx:id="quantiteColumn" prefWidth="100.0" text="Quantité" />
+                                                                                <TableColumn fx:id="etatColumn" prefWidth="100.0" text="État" />
+                                                                                <TableColumn fx:id="prixUnitaireColumn" prefWidth="100.0" text="Prix Unitaire" />
+                                                                                <TableColumn fx:id="modifierColumn" prefWidth="80.0" text="Modifier" />
+                                                                                <TableColumn fx:id="deleteColumn" prefWidth="80.0" text="Supprimer" />
+                                                                            </columns>
+                                                                        </TableView>
+                                                                        <AnchorPane layoutY="335.0" prefHeight="177.0" prefWidth="830.0">
+                                                                            <children>
+                                                                                <AnchorPane layoutY="7.0" prefHeight="131.0" prefWidth="250.0" stylesheets="@../dashboardDesign.css">
+                                                                                    <children>
+                                                                                        <Button fx:id="addMaterielButton" layoutX="58.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleAddMaterielButton" prefHeight="35.0" prefWidth="134.0" styleClass="btn-primary" text="Add Matériel" />
+                                                                                    </children>
+                                                                                    <styleClass>
+                                                                                        <String fx:value="card" />
+                                                                                        <String fx:value="shadow" />
+                                                                                    </styleClass>
+                                                                                </AnchorPane>
+                                                                                <AnchorPane layoutX="290.0" layoutY="7.0" prefHeight="131.0" prefWidth="250.0" stylesheets="@../dashboardDesign.css">
+                                                                                    <children>
+                                                                                        <Button fx:id="addMaterielButton1" layoutX="58.0" layoutY="53.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="134.0" styleClass="btn-primary" text="Analytics" />
+                                                                                    </children>
+                                                                                    <styleClass>
+                                                                                        <String fx:value="card" />
+                                                                                        <String fx:value="shadow" />
+                                                                                    </styleClass>
+                                                                                </AnchorPane>
+                                                                                <AnchorPane layoutX="579.0" layoutY="7.0" prefHeight="131.0" prefWidth="250.0" stylesheets="@../dashboardDesign.css">
+                                                                                    <children>
+                                                                                        <Button fx:id="addMaterielButton11" layoutX="58.0" layoutY="53.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="134.0" styleClass="btn-primary" text="Statistics" />
+                                                                                    </children>
+                                                                                    <styleClass>
+                                                                                        <String fx:value="card" />
+                                                                                        <String fx:value="shadow" />
+                                                                                    </styleClass>
+                                                                                </AnchorPane>
+                                                                            </children>
+                                                                        </AnchorPane>
+                                                                    </children>
+                                                                </AnchorPane>
+                                                            </content>
+                                                        </Tab>
+                                                    </tabs>
+                                                </TabPane>
+                                            </children>
+                                        </AnchorPane>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </center>
+                </BorderPane>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.user.JarbyController">
+   <Label text="Enter your email:"/>
+   <TextField fx:id="emailField" xmlns:fx="http://javafx.com/fxml"/>
+   <Button text="Send Verification Code" fx:id="button_mail" onAction="#bt_envoyermail"/>
+</VBox>

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.fournisseur.ModifyMateriel">
+    <children>
+        <AnchorPane fx:id="main_form" prefHeight="614.0" prefWidth="1100.0">
+            <children>
+                <BorderPane layoutX="79.0" layoutY="100.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <left>
+                        <AnchorPane prefHeight="555.0" prefWidth="211.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane prefHeight="555.0" prefWidth="214.0" styleClass="nav-form" stylesheets="@../dashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <Line endX="69.0" layoutX="121.0" layoutY="178.0" startX="-100.0" stroke="WHITE" />
+                                        <Button fx:id="logout" layoutX="21.0" layoutY="504.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="32.0" stylesheets="@../dashboardDesign.css">
+                                            <styleClass>
+                                                <String fx:value="logout" />
+                                                <String fx:value="shadow" />
+                                            </styleClass>
+                                            <graphic>
+                                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../images/logout_w.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                        <Label layoutX="82.0" layoutY="512.0" prefHeight="29.0" prefWidth="100.0" text="LOGOUT" textFill="WHITE">
+                                            <font>
+                                                <Font name="Montserrat ExtraBold" size="20.0" />
+                                            </font>
+                                        </Label>
+                                        <Accordion layoutX="-1.0" layoutY="189.0" prefHeight="250.0" prefWidth="200.0" />
+                                        <AnchorPane layoutX="6.0" layoutY="14.0" prefHeight="155.0" prefWidth="200.0">
+                                            <children>
+                                                <ImageView fitHeight="41.0" fitWidth="184.0" layoutX="8.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../icons/matchupz.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <Label alignment="CENTER" layoutY="69.0" prefHeight="38.0" prefWidth="200.0" text="Welcome," textAlignment="CENTER" textFill="WHITE">
+                                                    <font>
+                                                        <Font name="Comic Sans MS" size="29.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </AnchorPane>
+                              <Button fx:id="dashboard" alignment="CENTER" layoutX="-2.0" layoutY="175.0" mnemonicParsing="false" onAction="#dashboard" prefHeight="40.0" prefWidth="198.0" styleClass="accordion-button" text="Home">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="logistique" alignment="CENTER" layoutX="1.0" layoutY="218.0" mnemonicParsing="false" onAction="#logistique" prefHeight="40.0" prefWidth="195.0" styleClass="accordion-button" text="Logistique">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="espace" alignment="CENTER" layoutX="1.0" layoutY="264.0" mnemonicParsing="false" onAction="#espace" prefHeight="40.0" prefWidth="199.0" styleClass="accordion-button" text="Espace sportif">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="19.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/home.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="18.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/logistics.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="15.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/espaces.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="teams" alignment="CENTER" layoutX="-1.0" layoutY="305.0" mnemonicParsing="false" onAction="#teams" prefHeight="40.0" prefWidth="201.0" styleClass="accordion-button" text="Teams">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="sponsor" alignment="CENTER" layoutX="3.0" layoutY="344.0" mnemonicParsing="false" onAction="#sponsor" prefHeight="40.0" prefWidth="200.0" styleClass="accordion-button" text="Sponsor">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="match" alignment="CENTER" layoutY="387.0" mnemonicParsing="false" onAction="#match" prefHeight="40.0" prefWidth="198.0" styleClass="accordion-button" text="Match">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="bt_user" alignment="CENTER" layoutY="429.0" mnemonicParsing="false" onAction="#pageuser" prefHeight="40.0" prefWidth="202.0" styleClass="accordion-button" text="Utilisateur ">
+                                 <font>
+                                    <Font name="Montserrat Medium" size="12.0" />
+                                 </font>
+                              </Button>
+                              <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="18.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/team.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="37.0" fitWidth="30.0" layoutX="17.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/sponsor.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="16.0" layoutY="393.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/vs.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="16.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/user.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="nom_user" alignment="CENTER" layoutX="4.0" layoutY="122.0" prefHeight="38.0" prefWidth="200.0" textAlignment="CENTER" textFill="#eab700">
+                                 <font>
+                                    <Font name="Comic Sans MS Bold" size="35.0" />
+                                 </font>
+                              </Label>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </left>
+                    <center>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane fx:id="home_form" layoutX="63.0" layoutY="87.0" prefHeight="594.0" prefWidth="889.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="569.0" prefWidth="870.0" stylesheets="@../dashboardDesign.css">
+                                            <styleClass>
+                                                <String fx:value="white-bg" />
+                                                <String fx:value="shadow" />
+                                            </styleClass>
+                                            <children>
+                                                <GridPane hgap="10.0" layoutX="16.0" layoutY="86.0" minHeight="-Infinity" prefHeight="453.0" prefWidth="830.0" vgap="20.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="409.4000244140625" minWidth="10.0" prefWidth="199.8000030517578" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="660.5999603271484" minWidth="10.0" prefWidth="630.1999969482422" />
+                                          <ColumnConstraints />
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" textAlignment="CENTER" wrappingWidth="174.13672256469727">
+                                                            <font>
+                                                                <Font name="Montserrat Medium" size="15.0" />
+                                                            </font>
+                                                        </Text>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Type" textAlignment="CENTER" wrappingWidth="174.13672256469727" GridPane.rowIndex="1">
+                                                            <font>
+                                                                <Font name="Montserrat Medium" size="15.0" />
+                                                            </font>
+                                                        </Text>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantité" textAlignment="CENTER" wrappingWidth="174.13672256469727" GridPane.rowIndex="2">
+                                                            <font>
+                                                                <Font name="Montserrat Medium" size="15.0" />
+                                                            </font>
+                                                        </Text>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="État" textAlignment="CENTER" wrappingWidth="174.13672256469727" GridPane.rowIndex="3">
+                                                            <font>
+                                                                <Font name="Montserrat Medium" size="15.0" />
+                                                            </font>
+                                                        </Text>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prix Unitaire" textAlignment="CENTER" wrappingWidth="174.13672256469727" GridPane.rowIndex="4">
+                                                            <font>
+                                                                <Font name="Montserrat Medium" size="15.0" />
+                                                            </font>
+                                                        </Text>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fournisseur" textAlignment="CENTER" wrappingWidth="174.13672256469727" GridPane.rowIndex="5">
+                                                            <font>
+                                                                <Font name="Montserrat Medium" size="15.0" />
+                                                            </font>
+                                                        </Text>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Barcode" textAlignment="CENTER" wrappingWidth="174.13672256469727" GridPane.rowIndex="6">
+                                                            <font>
+                                                                <Font name="Montserrat Medium" size="15.0" />
+                                                            </font>
+                                                        </Text>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image" textAlignment="CENTER" wrappingWidth="174.13672256469727" GridPane.rowIndex="7">
+                                                            <font>
+                                                                <Font name="Montserrat Medium" size="15.0" />
+                                                            </font>
+                                                        </Text>
+
+                                                        <TextField fx:id="nomField" promptText="Entrer le nom du matériel" GridPane.columnIndex="1" />
+                                                        <ComboBox fx:id="comboBoxType" promptText="Sélectionner un type" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                        <TextField fx:id="quantiteField" promptText="Entrer la quantité" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                        <ComboBox fx:id="comboBoxEtat" promptText="Sélectionner un état" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                        <TextField fx:id="prixUnitaireField" promptText="Entrer le prix unitaire" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                        <ComboBox fx:id="comboBoxFournisseur" promptText="Sélectionner un fournisseur" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                        <TextField fx:id="barcodeField" promptText="Entrer le barcode" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                        <Button fx:id="scanButton" onAction="#scanBarcode" prefHeight="25.0" prefWidth="100.0" text="Scan Code" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                                        <Button fx:id="uploadImageButton" onAction="#handleUploadImage" prefHeight="25.0" prefWidth="150.0" text="Télécharger Image" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                        <ImageView fx:id="imageView" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+
+                                                        <AnchorPane prefHeight="50.0" prefWidth="630.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                                            <children>
+                                                                <Button id="btn-secondary" fx:id="annulerButton" layoutY="7.0" mnemonicParsing="false" onAction="#handleAnnulerButton" prefHeight="35.0" prefWidth="164.0" text="Précédent" />
+                                                                <Button fx:id="modifierButton" layoutX="467.0" layoutY="7.0" mnemonicParsing="false" onAction="#modifier" prefHeight="35.0" prefWidth="156.0" styleClass="btn-primary" text="Modifier" />
+                                                            </children>
+                                                        </AnchorPane>
+                                                    </children>
+                                                </GridPane>
+                                                <Text layoutX="164.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modification du Matériel" textAlignment="CENTER" wrappingWidth="534.9367065429688">
+                                                    <font>
+                                                        <Font name="Montserrat SemiBold" size="36.0" />
+                                                    </font>
+                                                </Text>
+                                            </children>
+                                        </AnchorPane>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </center>
+                </BorderPane>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>

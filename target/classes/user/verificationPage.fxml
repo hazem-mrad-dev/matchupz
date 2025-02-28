@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.user.VerificationController">
+   <!-- Title -->
+   <Label text="Password Reset">
+      <font>
+         <Font name="Arial" size="18" />
+      </font>
+   </Label>
+
+   <!-- Verification Code Field -->
+   <Label text="Enter Verification Code:" />
+   <TextField fx:id="codeField" promptText="Verification Code" />
+
+   <!-- New Password Field -->
+   <Label text="Enter New Password:" />
+   <TextField fx:id="newPasswordField" promptText="New Password" />
+
+   <!-- Submit Button -->
+   <Button text="Submit" onAction="#bt_submit" />
+</VBox>

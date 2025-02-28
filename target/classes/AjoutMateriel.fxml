@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="mainContainer" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: linear-gradient(to right, #E3F2FD, #FFFFFF);"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.logistics.AjoutMateriel">
+
+    <!-- Link the CSS file -->
+    <stylesheets>
+        <URL value="@/css/style.css" />
+    </stylesheets>
+
+    <children>
+
+        <!-- Sidebar (No changes) -->
+        <VBox layoutX="0" layoutY="0" prefHeight="650.0" prefWidth="90.0"
+              style="-fx-background-color: #10375C; -fx-spacing: 20; -fx-alignment: center;">
+            <ImageView fitHeight="40.0" fitWidth="40.0">
+                <image><Image url="@icons/home.png" /></image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0">
+                <image><Image url="@icons/logistics.png" /></image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0">
+                <image><Image url="@icons/team.png" /></image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0">
+                <image><Image url="@icons/sponsor.png" /></image>
+            </ImageView>
+        </VBox>
+
+        <!-- Top Bar -->
+        <HBox layoutX="110.0" layoutY="15.0" spacing="20">
+            <ImageView fitHeight="30.0" fitWidth="200.0">
+                <image><Image url="@icons/matchupz.png" /></image>
+            </ImageView>
+            <TextField prefWidth="280.0" promptText="🔍 Rechercher..."
+                       style="-fx-background-radius: 25px; -fx-padding: 8px; -fx-border-color: #B0BEC5; -fx-border-radius: 25px; -fx-font-size: 14px;" />
+        </HBox>
+
+        <!-- Horizontal Navbar -->
+        <HBox layoutX="518.0" layoutY="64.0" spacing="20"
+              style="-fx-background-color: #10375C; -fx-padding: 10px; -fx-border-radius: 15px;">
+            <Button onAction="#switchToFournisseur" styleClass="nav-button" text="Fournisseurs" />
+            <Button onAction="#switchToMateriel" styleClass="nav-button" text="Matériel" />
+        </HBox>
+
+        <!-- Formulaire Ajout Matériel -->
+        <VBox layoutX="110.0" layoutY="120.0" spacing="15" styleClass="form-container">
+            <Text styleClass="form-title" text="• Ajouter un Matériel :" />
+            <Label text="Nom :" />
+            <TextField fx:id="textFieldNom" styleClass="input-field" />
+            <Label text="Type :" />
+            <ComboBox fx:id="comboBoxType" styleClass="input-field" />
+            <Label text="Quantité :" />
+            <TextField fx:id="textFieldQuantite" styleClass="input-field" />
+            <Label text="État :" />
+            <ComboBox fx:id="comboBoxEtat" styleClass="input-field" />
+            <Label text="Prix Unitaire :" />
+            <TextField fx:id="textFieldPrix" styleClass="input-field" />
+            <Button fx:id="btnAjout" onAction="#ajouterMateriel" text="Ajouter" styleClass="modern-button" />
+        </VBox>
+
+        <!-- TableView Matériel -->
+        <TableView fx:id="materielTable" layoutX="487.0" layoutY="120.0" prefHeight="400.0" prefWidth="710.0" styleClass="modern-table">
+            <columns>
+                <TableColumn fx:id="colNom" prefWidth="120.0" text="Nom" />
+                <TableColumn fx:id="colType" prefWidth="150.0" text="Type" />
+                <TableColumn fx:id="colQuantite" prefWidth="100.0" text="Quantité" />
+                <TableColumn fx:id="colEtat" prefWidth="100.0" text="État" />
+                <TableColumn fx:id="colPrix" prefWidth="120.0" text="Prix Unitaire" />
+                <TableColumn fx:id="colModifier" prefWidth="80.0" text="Modifier" />
+                <TableColumn fx:id="colSupprimer" prefWidth="80.0" text="Supprimer" />
+            </columns>
+        </TableView>
+
+    </children>
+</AnchorPane>

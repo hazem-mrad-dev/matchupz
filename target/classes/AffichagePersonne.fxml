@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AffichagePersonne">
+    <children>
+        <Label fx:id="nomID" layoutX="259.0" layoutY="76.0" text="Label">
+            <font>
+                <Font size="43.0" />
+            </font>
+        </Label>
+        <Label fx:id="prenomID" layoutX="259.0" layoutY="256.0" text="Label">
+            <font>
+                <Font size="43.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
